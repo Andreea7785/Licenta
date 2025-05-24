@@ -1,0 +1,31 @@
+.layout {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+
+
+.content-area {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.header {
+  height: 70px;
+  padding: 20px;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+
+.footer {
+  padding: 15px;
+  border-top: 1px solid #ccc;
+  background: #f8f8f8;
+  text-align: center;
+}

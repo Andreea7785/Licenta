@@ -1,35 +1,36 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./Pages/Home/Home.jsx";
+import TermsAndConditions from "./Pages/TermsAndConditions/TermsAndConditions";
+import PrivacyPolicy from "./Pages/PrivacyPolicy/PrivacyPolicy.jsx";
+import FAQ from "./Pages/FAQ/FAQ.jsx";
+import AboutUs from "./Pages/AboutUs/AboutUs.jsx";
+import Agents from "./Pages/Agents/Agents.jsx";
+import TellUs from "./Pages/TellUs/TellUs.jsx";
+import { AvailableProperties } from "./Pages/AvailableProperties/AvailableProperties.jsx";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/termeni-si-conditii" element={<TermsAndConditions />} />
+        <Route
+          path="/politica-de-confidentialitate"
+          element={<PrivacyPolicy />}
+        />
+        <Route path="/intrebari-frecvente" element={<FAQ />} />
+        <Route path="/despre-noi" element={<AboutUs />} />
+        <Route path="/agenti-imobiliari" element={<Agents />} />
+        <Route path="/formular" element={<TellUs />} />
+        <Route
+          path="/proprietati-disponibile"
+          element={<AvailableProperties />}
+        ></Route>
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;

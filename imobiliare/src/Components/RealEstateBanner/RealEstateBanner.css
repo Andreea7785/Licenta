@@ -1,0 +1,73 @@
+.banner-container {
+  padding: 2rem;
+  font-family: Arial, sans-serif;
+}
+
+.banner-header {
+  text-align: center;
+  border: 1px solid #ccc;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.banner-logo {
+  font-size: 0.9rem;
+  color: #888;
+  margin-bottom: 0.5rem;
+}
+
+.banner-header h1 {
+  font-size: 1.8rem;
+  margin: 0.3rem 0;
+}
+
+.banner-header p {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.banner-about {
+  background-color: #f5ebdb;
+  padding: 1.5rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  border-radius: 5px;
+}
+
+.banner-about h2 {
+  margin-bottom: 0.8rem;
+}
+
+.banner-stats {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.stat-item {
+  flex: 1;
+  padding: 1rem;
+  border-radius: 6px;
+  text-align: center;
+  min-width: 30%;
+}
+
+.stat-beige {
+  background-color: #d5bba9;
+}
+
+.stat-brown {
+  background-color: #b57764;
+  color: white;
+}
+
+.stat-purple {
+  background-color: #83777e;
+  color: white;
+}
+
+.banner-body{
+    max-width: 1200px;
+    margin: 0 auto;
+}
