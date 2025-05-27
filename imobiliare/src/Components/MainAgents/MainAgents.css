@@ -1,0 +1,43 @@
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); 
+  gap: 1.5rem;
+  padding: 2rem;
+  padding-bottom: 110px;
+}
+
+
+.agent-card {
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 1rem;
+  background-color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.agent-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.agent-card h3 {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+}
+
+.agent-card p {
+  color: #555;
+  font-size: 0.95rem;
+}
+
+.agent-card button {
+  margin-top: 0.5rem;
+  background-color: #b6896d;
+  border: none;
+  padding: 0.5rem 1rem;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}

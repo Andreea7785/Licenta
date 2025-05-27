@@ -8,6 +8,7 @@ import AboutUs from "./Pages/AboutUs/AboutUs.jsx";
 import Agents from "./Pages/Agents/Agents.jsx";
 import TellUs from "./Pages/TellUs/TellUs.jsx";
 import { AvailableProperties } from "./Pages/AvailableProperties/AvailableProperties.jsx";
+import AgentPage from "./Pages/AgentPage/AgentPage.jsx";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           path="/proprietati-disponibile"
           element={<AvailableProperties />}
         ></Route>
+        <Route path="/agent/:id" element={<AgentPage />} />
       </Routes>
     </BrowserRouter>
   );

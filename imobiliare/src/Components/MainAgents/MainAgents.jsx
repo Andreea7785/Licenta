@@ -1,8 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./MainAgents.css";
+import { useNavigate } from "react-router-dom";
 
-// eslint-disable-next-line react-refresh/only-export-components
-export default function () {
+export default function MainAgents() {
+  const [agents, setAgents] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    fetch("http://localhost:8080/api/agents")
+      .then((res) => res.json())
+      .then((data) => setAgents(data))
+      .catch((err) => console.error("Eroare la fetch:", err));
+  }, []);
+
   return (
     <div className="agents">
       <div className="title">
@@ -16,6 +26,25 @@ export default function () {
           lucrezi, în funcție de experiența sa, specializările și tranzacțiile
           anterioare încheiate cu succes.
         </p>
+      </div>
+
+      <div className="card-container">
+        {agents.map((agent) => (
+          <div key={agent.userId} className="agent-card">
+            <img
+              src={`/images/${agent.profilePicture}`}
+              alt={`${agent.firstname} ${agent.lastname}`}
+            />
+
+            <h3>
+              {agent.firstname} {agent.lastname}
+            </h3>
+            <p>{agent.title}</p>
+            <button onClick={() => navigate(`/agent/${agent.userId}`)}>
+              Află mai multe...
+            </button>
+          </div>
+        ))}
       </div>
     </div>
   );

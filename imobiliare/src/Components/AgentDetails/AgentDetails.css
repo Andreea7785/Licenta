@@ -1,0 +1,12 @@
+.agent-details{
+    display: flex;
+    padding: 60px;
+}
+
+.content{
+    text-align: center;
+}
+
+.content h4{
+    font-style: normal;
+}

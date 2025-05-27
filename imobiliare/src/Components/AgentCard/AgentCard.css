@@ -1,0 +1,9 @@
+.agent-card {
+  width: 200px;
+  text-align: center;
+}
+
+.agent-card img {
+  width: 100%;
+  border-radius: 10px;
+}
