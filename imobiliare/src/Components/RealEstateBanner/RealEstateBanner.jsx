@@ -33,13 +33,15 @@ export const RealEstateBanner = () => {
       </div>
       <div className="banner-body">
         <div className="banner-about">
-          <h2>Despre Noi</h2>
           <p>
             La HomeDeal suntem dedicați să oferim servicii de calitate care să
-            răspundă nevoilor și dorințelor clienților noștri. Înființați în
-            2019, ne-am propus să aducem un impact real în imobiliare, oferind
-            soluții inovative și personalizate.
+            răspundă nevoilor și dorințelor clienților noștri. Încă din 2019,
+            ne-am propus să aducem un impact real în imobiliare, oferind soluții
+            inovative și personalizate.
           </p>
+          <a href="/despre-noi" class="btn">
+            Află mai multe
+          </a>
         </div>
 
         <div className="banner-stats">

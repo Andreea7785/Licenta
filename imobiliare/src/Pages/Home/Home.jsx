@@ -125,6 +125,7 @@ export default function Home() {
       <div className="content-area">
         <Header />
         <RealEstateBanner />
+        <h2>Cele mai noi prorprietăți</h2>
         <RealEstateList properties={properties.slice(0, 4)} />
         <Footer />
       </div>
