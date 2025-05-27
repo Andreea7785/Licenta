@@ -36,6 +36,19 @@ public class User {
         public void setProfilePicture(String profilePicture) {
                 this.profilePicture = profilePicture;
         }
+
+        @Column(name = "title")
+        private String title;
+
+        public String getTitle() {
+                return title;
+        }
+
+        public void setTitle(String title) {
+                this.title = title;
+        }
+
+
         public Integer getUserId() { return userId; }
         public void setUserId(Integer userId) { this.userId = userId; }
 
