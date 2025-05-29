@@ -20,15 +20,16 @@ export default function AgentDetails() {
       <div className="profile-picture">
         <img src={`/images/${agent.profilePicture}`} alt={agent.firstname} />
       </div>
-      <div className="content">
-        <h2>
+      <div className="content-agent-details">
+        <h1>
           {agent.firstname} {agent.lastname}
-        </h2>
-        <h4>{agent.title}</h4>
+        </h1>
+        <h2>{agent.title}</h2>
         <p>{agent.description}</p>
         <h2>Contact</h2>
         <p>
-          <strong>Email:</strong> {agent.email}
+          <strong>Email: </strong>
+          {agent.email}
         </p>
         <p>
           <strong>Telefon:</strong> 0{agent.phoneNumber}

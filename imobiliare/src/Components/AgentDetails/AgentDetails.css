@@ -1,12 +1,57 @@
-.agent-details{
-    display: flex;
-    padding: 60px;
+.agent-details {
+  display: flex;
+  padding: 60px;
 }
 
-.content{
-    text-align: center;
+.agent-details {
+  display: flex;
+  gap: 40px;
+  padding: 61px;
+  align-items: flex-start;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #fff;
+  color: #333;
 }
 
-.content h4{
-    font-style: normal;
+.profile-picture img {
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.content-agent-details {
+  max-width: 600px;
+  text-align: justify;
+}
+
+.content-agent-details h2,
+h1 {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  text-shadow: #333;
+  font-style: normal;
+  text-shadow: none;
+}
+
+.content-agent-details p {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 12px;
+  color: black;
+}
+
+.content-agent-details h2 {
+  font-size: 18px;
+  padding-left: 0px;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  font-weight: bold;
+}
+
+.content-agent-details h1 {
+  font-size: 28px;
+  padding-bottom: 10px;
+  font-weight: bold;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  color: black;
 }
