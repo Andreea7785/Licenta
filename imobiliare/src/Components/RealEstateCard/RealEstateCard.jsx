@@ -82,22 +82,30 @@ const RealEstateCard = ({
           FD: {code}
         </Typography>
         <Box display="flex" gap={2} mt={1}>
-          <Box display="flex" alignItems="center" gap={0.5}>
+          <Box display="flex" alignItems="center">
             <HotelIcon fontSize="small" />
-            <Typography variant="body2">{rooms}</Typography>
+            <Typography variant="body2" ml={0.5}>
+              {rooms}
+            </Typography>
           </Box>
-          <Box display="flex" alignItems="center" gap={0.5}>
+          <Box display="flex" alignItems="center">
             <BathtubIcon fontSize="small" />
-            <Typography variant="body2">{bathrooms}</Typography>
+            <Typography variant="body2" ml={0.5}>
+              {bathrooms}
+            </Typography>
           </Box>
-          <Box display="flex" alignItems="center" gap={0.5}>
+          <Box display="flex" alignItems="center">
             <SquareFootIcon fontSize="small" />
-            <Typography variant="body2">{surface} mp</Typography>
+            <Typography variant="body2" ml={0.5}>
+              {surface} mp
+            </Typography>
           </Box>
         </Box>
       </CardContent>
       <CardActions disableSpacing>
-        <Button size="small">Vezi detalii</Button>
+        <Button size="small" href={`/property/${code}`} component="a">
+          Vezi detalii
+        </Button>
       </CardActions>
     </Card>
   );

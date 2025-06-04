@@ -1,6 +1,8 @@
 package com.realestate.backend.model;
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -28,6 +30,8 @@ public class User {
         private byte[] document;
         @Column(name = "profile_picture")
         private String profilePicture;
+        @OneToMany(mappedBy = "agent")
+        private List<Property> properties;
 
         public String getProfilePicture() {
                 return profilePicture;
