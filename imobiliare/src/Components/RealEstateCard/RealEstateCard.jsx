@@ -32,12 +32,20 @@ const RealEstateCard = ({
     `property${code}3.jpg`,
   ];
   return (
-    <Card sx={{ position: "relative" }}>
+    <Card
+      sx={{
+        position: "relative",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        width: 320, // Lățime fixă pentru aliniere corectă
+      }}
+    >
       <CardMedia
         component="img"
-        height="180"
         image={`/images/${generatedImages[0]}`}
         alt={title}
+        sx={{ height: 180, objectFit: "cover" }}
       />
       <Chip
         label="Vanzare"
@@ -77,9 +85,23 @@ const RealEstateCard = ({
         }}
       />
       <CardContent>
-        <Typography variant="subtitle1" fontWeight="bold">
-          {title}
-        </Typography>
+        <div className="title-card">
+          <Typography
+            variant="subtitle1"
+            fontWeight="bold"
+            sx={{
+              display: "-webkit-box",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              WebkitBoxOrient: "vertical",
+              WebkitLineClamp: 2,
+              height: "3em", // aproximativ 2 rânduri de text
+              lineHeight: "1.5em",
+            }}
+          >
+            {title}
+          </Typography>
+        </div>
         <Box display="flex" alignItems="center" mb={1}>
           <LocationOnIcon fontSize="small" color="action" />
           <Typography variant="body2" ml={0.5}>

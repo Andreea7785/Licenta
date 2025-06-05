@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import backgroundImage from "../../assets/background_filter.png";
 import {
   Box,
   Typography,
@@ -10,9 +9,18 @@ import {
   Button,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import backgroundImage from "../../assets/background_filter.png";
 
-export const RealEstateFilter = () => {
-  const [showMorefilters, setShowMoreFilters] = useState(false);
+const RealEstateFilter = ({ filter, setFilter, agents, zones }) => {
+  const [showMoreFilters, setShowMoreFilters] = useState(false);
+
+  const handleChange = (field) => (event) => {
+    setFilter((prev) => ({
+      ...prev,
+      [field]: event.target.value,
+    }));
+  };
+  console.log("AGENTS în dropdown:", agents);
 
   return (
     <Box
@@ -21,16 +29,17 @@ export const RealEstateFilter = () => {
         backgroundSize: "cover",
         backgroundPosition: "center",
         borderRadius: "24px",
-        padding: 4,
+        padding: 3,
         textAlign: "center",
         color: "white",
         position: "relative",
         overflow: "hidden",
-        minHeight: "300px",
+        minHeight: "180px",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
-        gap: 3,
+        gap: 2,
+        margin: 5,
       }}
     >
       <Box
@@ -45,7 +54,6 @@ export const RealEstateFilter = () => {
           zIndex: 1,
         }}
       />
-
       <Box sx={{ position: "relative", zIndex: 2 }}>
         <Typography variant="h4" fontWeight="bold" gutterBottom>
           Casa visurilor tale te așteaptă!
@@ -54,6 +62,8 @@ export const RealEstateFilter = () => {
           Descoperă cele mai bune oferte imobiliare și găsește locuința perfectă
           pentru tine.
         </Typography>
+
+        {/* Filtre principale */}
         <Box
           sx={{
             display: "flex",
@@ -63,85 +73,78 @@ export const RealEstateFilter = () => {
             mb: 2,
           }}
         >
+          {/* Tip */}
           <FormControl
-            key={"Tip"}
             variant="filled"
             size="small"
-            sx={{ minWidth: 120, backgroundColor: "white", borderRadius: 2 }}
+            sx={{ minWidth: 160, backgroundColor: "white", borderRadius: 2 }}
           >
-            <InputLabel>{"Tip"}</InputLabel>
+            <InputLabel>Tip</InputLabel>
             <Select
-              label={"Tip"}
+              value={filter.tip}
+              onChange={handleChange("tip")}
               IconComponent={ExpandMoreIcon}
-              defaultValue=""
             >
-              <MenuItem value="">Selectează</MenuItem>
-              <MenuItem value="1">Opțiune 1</MenuItem>
-              <MenuItem value="2">Opțiune 2</MenuItem>
+              <MenuItem value="">Toate</MenuItem>
+              <MenuItem value="casă">Casă</MenuItem>
+              <MenuItem value="apartament">Apartament</MenuItem>
+              <MenuItem value="garsonieră">Garsonieră</MenuItem>
             </Select>
           </FormControl>
+
+          {/* Suprafață */}
           <FormControl
-            key={"Zona"}
             variant="filled"
             size="small"
-            sx={{ minWidth: 120, backgroundColor: "white", borderRadius: 2 }}
+            sx={{ minWidth: 160, backgroundColor: "white", borderRadius: 2 }}
           >
-            <InputLabel>{"Zona"}</InputLabel>
+            <InputLabel>Suprafață</InputLabel>
             <Select
-              label={"Zona"}
+              value={filter.suprafata}
+              onChange={handleChange("suprafata")}
               IconComponent={ExpandMoreIcon}
-              defaultValue=""
             >
-              <MenuItem value="">Selectează</MenuItem>
-              <MenuItem value="1">Opțiune 1</MenuItem>
-              <MenuItem value="2">Opțiune 2</MenuItem>
+              <MenuItem value="">Toate</MenuItem>
+              <MenuItem value="sub50">Sub 50 mp</MenuItem>
+              <MenuItem value="intre50-100">Între 50–100 mp</MenuItem>
+              <MenuItem value="peste100">Peste 100 mp</MenuItem>
             </Select>
           </FormControl>
+
+          {/* Preț */}
           <FormControl
-            key={"Suprafata"}
             variant="filled"
             size="small"
-            sx={{ minWidth: 120, backgroundColor: "white", borderRadius: 2 }}
+            sx={{ minWidth: 160, backgroundColor: "white", borderRadius: 2 }}
           >
-            <InputLabel>{"Suprafata"}</InputLabel>
+            <InputLabel>Preț</InputLabel>
             <Select
-              label={"Suprafata"}
+              value={filter.pret}
+              onChange={handleChange("pret")}
               IconComponent={ExpandMoreIcon}
-              defaultValue=""
             >
-              <MenuItem value="">Selectează</MenuItem>
-              <MenuItem value="1">Opțiune 1</MenuItem>
-              <MenuItem value="2">Opțiune 2</MenuItem>
-            </Select>
-          </FormControl>
-          <FormControl
-            key={"Oras"}
-            variant="filled"
-            size="small"
-            sx={{ minWidth: 120, backgroundColor: "white", borderRadius: 2 }}
-          >
-            <InputLabel>{"Oras"}</InputLabel>
-            <Select
-              label={"Oras"}
-              IconComponent={ExpandMoreIcon}
-              defaultValue=""
-            >
-              <MenuItem value="">Selectează</MenuItem>
-              <MenuItem value="1">Opțiune 1</MenuItem>
-              <MenuItem value="2">Opțiune 2</MenuItem>
+              <MenuItem value="">Toate</MenuItem>
+              <MenuItem value="sub50000">Sub 50.000 €</MenuItem>
+              <MenuItem value="intre50-100">50.000 – 100.000 €</MenuItem>
+              <MenuItem value="intre100-150">100.000 – 150.000 €</MenuItem>
+              <MenuItem value="peste150">Peste 150.000 €</MenuItem>
             </Select>
           </FormControl>
         </Box>
 
+        {/* Buton pentru mai multe filtre */}
         <Button
+          type="button"
           variant="text"
           endIcon={<ExpandMoreIcon />}
           onClick={() => setShowMoreFilters((prev) => !prev)}
           sx={{ color: "white", textTransform: "none", fontWeight: "bold" }}
         >
-          {!showMorefilters ? "Mai multe filtre" : "Mai putin filtre"}{" "}
+          {!showMoreFilters ? "Mai multe filtre" : "Mai puține filtre"}
         </Button>
-        {showMorefilters && (
+
+        {/* Mai multe filtre */}
+        {showMoreFilters && (
           <Box
             sx={{
               display: "flex",
@@ -152,72 +155,66 @@ export const RealEstateFilter = () => {
               padding: "10px",
             }}
           >
+            {/* Camere */}
             <FormControl
-              key={"Tip"}
               variant="filled"
               size="small"
-              sx={{ minWidth: 120, backgroundColor: "white", borderRadius: 2 }}
+              sx={{ minWidth: 160, backgroundColor: "white", borderRadius: 2 }}
             >
-              <InputLabel>{"Tip"}</InputLabel>
+              <InputLabel>Camere</InputLabel>
               <Select
-                label={"Tip"}
+                value={filter.camere}
+                onChange={handleChange("camere")}
                 IconComponent={ExpandMoreIcon}
-                defaultValue=""
               >
-                <MenuItem value="">Selectează</MenuItem>
-                <MenuItem value="1">Opțiune 1</MenuItem>
-                <MenuItem value="2">Opțiune 2</MenuItem>
+                <MenuItem value="">Toate</MenuItem>
+                <MenuItem value="1">1 cameră</MenuItem>
+                <MenuItem value="2">2 camere</MenuItem>
+                <MenuItem value="3">3 camere</MenuItem>
+                <MenuItem value="4plus">4 sau mai multe camere</MenuItem>
               </Select>
             </FormControl>
+
             <FormControl
-              key={"Zona"}
               variant="filled"
               size="small"
-              sx={{ minWidth: 120, backgroundColor: "white", borderRadius: 2 }}
+              sx={{ minWidth: 160, backgroundColor: "white", borderRadius: 2 }}
             >
-              <InputLabel>{"Zona"}</InputLabel>
+              <InputLabel>Agent</InputLabel>
               <Select
-                label={"Zona"}
+                value={filter.agent}
+                onChange={handleChange("agent")}
                 IconComponent={ExpandMoreIcon}
-                defaultValue=""
               >
-                <MenuItem value="">Selectează</MenuItem>
-                <MenuItem value="1">Opțiune 1</MenuItem>
-                <MenuItem value="2">Opțiune 2</MenuItem>
+                <MenuItem value="">Toți</MenuItem>
+                {agents.map((agent) => (
+                  <MenuItem
+                    key={agent.userId}
+                    value={`${agent.firstname} ${agent.lastname}`}
+                  >
+                    {agent.firstname} {agent.lastname}
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
+
             <FormControl
-              key={"Suprafata"}
               variant="filled"
               size="small"
-              sx={{ minWidth: 120, backgroundColor: "white", borderRadius: 2 }}
+              sx={{ minWidth: 160, backgroundColor: "white", borderRadius: 2 }}
             >
-              <InputLabel>{"Suprafata"}</InputLabel>
+              <InputLabel>Zonă</InputLabel>
               <Select
-                label={"Suprafata"}
+                value={filter.zona}
+                onChange={handleChange("zona")}
                 IconComponent={ExpandMoreIcon}
-                defaultValue=""
               >
-                <MenuItem value="">Selectează</MenuItem>
-                <MenuItem value={50}>50</MenuItem>
-                <MenuItem value={10}>10</MenuItem>
-              </Select>
-            </FormControl>
-            <FormControl
-              key={"Oras"}
-              variant="filled"
-              size="small"
-              sx={{ minWidth: 120, backgroundColor: "white", borderRadius: 2 }}
-            >
-              <InputLabel>{"Oras"}</InputLabel>
-              <Select
-                label={"Oras"}
-                IconComponent={ExpandMoreIcon}
-                defaultValue=""
-              >
-                <MenuItem value="">Selectează</MenuItem>
-                <MenuItem value="1">Opțiune 1</MenuItem>
-                <MenuItem value="2">Opțiune 2</MenuItem>
+                <MenuItem value="">Toate</MenuItem>
+                {zones.map((zona) => (
+                  <MenuItem key={zona} value={zona}>
+                    {zona}
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
           </Box>
@@ -226,3 +223,5 @@ export const RealEstateFilter = () => {
     </Box>
   );
 };
+
+export default RealEstateFilter;
