@@ -56,6 +56,10 @@ export const AvailablePropMain = () => {
 
   const propertiesFiltered = useMemo(() => {
     return availableProperties.filter((imobil) => {
+      const tipOk =
+        filter.tip === "" ||
+        imobil.tip?.toLowerCase() === filter.tip.toLowerCase();
+
       const surfaceOk =
         filter.suprafata === "" ||
         (filter.suprafata === "sub50" && imobil.surface < 50) ||
@@ -85,14 +89,9 @@ export const AvailablePropMain = () => {
         filter.agent === "" ||
         imobil.agent?.toLowerCase() === filter.agent.toLowerCase();
 
-      return (
-        (filter.tip === "" || imobil.tip === filter.tip) &&
-        (filter.zona === "" || imobil.zona === filter.zona) &&
-        surfaceOk &&
-        priceOk &&
-        camereOk &&
-        agentOk
-      );
+      const zonaOk = filter.zona === "" || imobil.zona === filter.zona;
+
+      return tipOk && zonaOk && surfaceOk && priceOk && camereOk && agentOk;
     });
   }, [filter, availableProperties]);
 

@@ -33,7 +33,6 @@ export default function PropertyMain() {
   if (!property) return <p>Se încarcă...</p>;
 
   const imageList = property.images?.split(",").map((img) => img.trim()) || [];
-  console.log("Imagini din slider:", imageList);
 
   const sliderSettings = {
     dots: true,
