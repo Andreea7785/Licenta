@@ -12,6 +12,7 @@ import AgentPage from "./Pages/AgentPage/AgentPage.jsx";
 import PropertyPage from "./Pages/PropertyPage/PropertyPage.jsx";
 import LoginPage from "./Pages/LoginPage.jsx";
 import CreateAnAccount from "./Pages/CreateAnAccount.jsx";
+import { FavoriteProperties } from "./Pages/FavoriteProperties/FavoriteProperties.jsx";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           path="/proprietati-disponibile"
           element={<AvailableProperties />}
         ></Route>
+        <Route path="/proprietati-favorite" element={<FavoriteProperties />} />
         <Route path="/agent/:id" element={<AgentPage />} />
         <Route path="/property/:id" element={<PropertyPage />} />
         <Route path="/login" element={<LoginPage />} />

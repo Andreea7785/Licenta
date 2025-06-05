@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Card,
   CardMedia,
@@ -11,26 +11,43 @@ import {
   Button,
 } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import HotelIcon from "@mui/icons-material/Hotel";
 import BathtubIcon from "@mui/icons-material/Bathtub";
 import SquareFootIcon from "@mui/icons-material/SquareFoot";
 
-const RealEstateCard = ({
-  title,
-  location,
-  price,
-  surface,
-  rooms,
-  bathrooms,
-  rating,
-  code,
-}) => {
+const RealEstateCard = ({ card }) => {
   const generatedImages = [
-    `property${code}1.jpg`,
-    `property${code}2.jpg`,
-    `property${code}3.jpg`,
+    `property${card.code}1.jpg`,
+    `property${card.code}2.jpg`,
+    `property${card.code}3.jpg`,
   ];
+
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  useEffect(() => {
+    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    const exists = favorites.some((item) => item.id === card.id);
+    setIsFavorite(exists);
+  }, []);
+
+  const toggleFavorite = () => {
+    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+    const exists = favorites.some((item) => item.id === card.id);
+
+    if (exists) {
+      favorites = favorites.filter((item) => item.id !== card.id);
+      setIsFavorite(false);
+    } else {
+      favorites.push(card);
+      setIsFavorite(true);
+    }
+
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  };
   return (
     <Card
       sx={{
@@ -44,7 +61,7 @@ const RealEstateCard = ({
       <CardMedia
         component="img"
         image={`/images/${generatedImages[0]}`}
-        alt={title}
+        alt={card.title}
         sx={{ height: 180, objectFit: "cover" }}
       />
       <Chip
@@ -55,6 +72,7 @@ const RealEstateCard = ({
       />
       <IconButton
         aria-label="add to favorites"
+        onClick={toggleFavorite}
         style={{
           position: "absolute",
           bottom: "55%",
@@ -65,16 +83,20 @@ const RealEstateCard = ({
           padding: 4,
         }}
       >
-        <FavoriteBorderIcon />
+        {isFavorite ? (
+          <FavoriteIcon color="white" />
+        ) : (
+          <FavoriteBorderIcon />
+        )}
       </IconButton>
       <Chip
-        label={`${rating} ★`}
+        label={`${card.rating} ★`}
         color="warning"
         size="small"
         sx={{ position: "absolute", top: 10, right: 10 }}
       />
       <Chip
-        label={price}
+        label={card.price}
         color="primary"
         sx={{
           position: "absolute",
@@ -95,45 +117,45 @@ const RealEstateCard = ({
               textOverflow: "ellipsis",
               WebkitBoxOrient: "vertical",
               WebkitLineClamp: 2,
-              height: "3em", // aproximativ 2 rânduri de text
+              height: "3em", 
               lineHeight: "1.5em",
             }}
           >
-            {title}
+            {card.title}
           </Typography>
         </div>
         <Box display="flex" alignItems="center" mb={1}>
           <LocationOnIcon fontSize="small" color="action" />
           <Typography variant="body2" ml={0.5}>
-            {location}
+            {card.location}
           </Typography>
         </Box>
         <Typography variant="body2" color="text.secondary">
-          FD: {code}
+          FD: {card.code}
         </Typography>
         <Box display="flex" gap={2} mt={1}>
           <Box display="flex" alignItems="center">
             <HotelIcon fontSize="small" />
             <Typography variant="body2" ml={0.5}>
-              {rooms}
+              {card.rooms}
             </Typography>
           </Box>
           <Box display="flex" alignItems="center">
             <BathtubIcon fontSize="small" />
             <Typography variant="body2" ml={0.5}>
-              {bathrooms}
+              {card.bathrooms}
             </Typography>
           </Box>
           <Box display="flex" alignItems="center">
             <SquareFootIcon fontSize="small" />
             <Typography variant="body2" ml={0.5}>
-              {surface} mp
+              {card.surface} mp
             </Typography>
           </Box>
         </Box>
       </CardContent>
       <CardActions disableSpacing>
-        <Button size="small" href={`/property/${code}`} component="a">
+        <Button size="small" href={`/property/${card.code}`} component="a">
           Vezi detalii
         </Button>
       </CardActions>
