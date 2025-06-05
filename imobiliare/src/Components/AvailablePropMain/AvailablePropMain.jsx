@@ -33,12 +33,13 @@ export const AvailablePropMain = () => {
           tip: p.type,
           zona: p.area,
           oras: p.city,
-          agent: p.agentName || "",
+          agent: `${p.agent?.firstname || ""} ${
+            p.agent?.lastname || ""
+          }`.trim(),
           code: p.property_id,
         }));
         setAvailableProperties(formatted);
 
-        // Extrage zone unice
         const uniqueZones = [...new Set(data.map((p) => p.area))];
         setZones(uniqueZones);
       })
@@ -87,7 +88,8 @@ export const AvailablePropMain = () => {
 
       const agentOk =
         filter.agent === "" ||
-        imobil.agent?.toLowerCase() === filter.agent.toLowerCase();
+        imobil.agent?.toLowerCase().trim() ===
+          filter.agent.toLowerCase().trim();
 
       const zonaOk = filter.zona === "" || imobil.zona === filter.zona;
 

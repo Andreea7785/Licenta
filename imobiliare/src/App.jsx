@@ -10,6 +10,8 @@ import TellUs from "./Pages/TellUs/TellUs.jsx";
 import { AvailableProperties } from "./Pages/AvailableProperties/AvailableProperties.jsx";
 import AgentPage from "./Pages/AgentPage/AgentPage.jsx";
 import PropertyPage from "./Pages/PropertyPage/PropertyPage.jsx";
+import LoginPage from "./Pages/LoginPage.jsx";
+import CreateAnAccount from "./Pages/CreateAnAccount.jsx";
 
 function App() {
   return (
@@ -32,6 +34,8 @@ function App() {
         ></Route>
         <Route path="/agent/:id" element={<AgentPage />} />
         <Route path="/property/:id" element={<PropertyPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/create-an-account" element={<CreateAnAccount />} />
       </Routes>
     </BrowserRouter>
   );
