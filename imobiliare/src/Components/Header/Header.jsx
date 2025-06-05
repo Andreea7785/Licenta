@@ -38,7 +38,7 @@ export default function Header() {
             <div className="options">
               <ul>
                 <li>Informații cont</li>
-                <li> Proprietăți favorite</li>
+                <li><a href="/proprietati-favorite">Proprietăți favorite</a></li>
                 <li>Istoric vizionări</li>
                 <li>Documente încărcate</li>
                 <li>Istoric cumpărări</li>

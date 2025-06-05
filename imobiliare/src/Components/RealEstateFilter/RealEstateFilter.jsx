@@ -20,7 +20,6 @@ const RealEstateFilter = ({ filter, setFilter, agents, zones }) => {
       [field]: event.target.value,
     }));
   };
-  console.log("AGENTS în dropdown:", agents);
 
   return (
     <Box

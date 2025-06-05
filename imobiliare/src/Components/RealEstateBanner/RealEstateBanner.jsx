@@ -39,7 +39,7 @@ export const RealEstateBanner = () => {
             ne-am propus să aducem un impact real în imobiliare, oferind soluții
             inovative și personalizate.
           </p>
-          <a href="/despre-noi" class="btn">
+          <a href="/despre-noi" className="btn">
             Află mai multe
           </a>
         </div>
