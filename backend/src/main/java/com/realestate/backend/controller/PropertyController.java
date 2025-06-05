@@ -30,5 +30,10 @@ public class PropertyController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @GetMapping
+    public List<Property> getAllProperties() {
+        return propertyRepository.findAll();
+    }
+
 
 }

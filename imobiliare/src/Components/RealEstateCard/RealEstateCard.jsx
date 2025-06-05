@@ -1,4 +1,3 @@
-// components/RealEstateCard.tsx
 import React from "react";
 import {
   Card,
@@ -24,13 +23,22 @@ const RealEstateCard = ({
   surface,
   rooms,
   bathrooms,
-  image,
   rating,
   code,
 }) => {
+  const generatedImages = [
+    `property${code}1.jpg`,
+    `property${code}2.jpg`,
+    `property${code}3.jpg`,
+  ];
   return (
     <Card sx={{ position: "relative" }}>
-      <CardMedia component="img" height="180" image={image} alt={title} />
+      <CardMedia
+        component="img"
+        height="180"
+        image={`/images/${generatedImages[0]}`}
+        alt={title}
+      />
       <Chip
         label="Vanzare"
         color="error"

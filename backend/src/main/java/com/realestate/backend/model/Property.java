@@ -47,7 +47,7 @@ import jakarta.persistence.*;
 
         private Integer bathrooms;
         private String year;
-        private String image;
+        private String images;
         private String area;
         private Integer surface;
 
@@ -171,12 +171,12 @@ import jakarta.persistence.*;
             this.year = year;
         }
 
-        public String getImage() {
-            return image;
+        public String getImages() {
+            return images;
         }
 
-        public void setImage(String image) {
-            this.image = image;
+        public void setImages(String image) {
+            this.images = images;
         }
 
         public String getArea() {

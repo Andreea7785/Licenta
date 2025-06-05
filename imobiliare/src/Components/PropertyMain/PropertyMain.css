@@ -69,12 +69,12 @@
   display: flex;
   flex-direction: column;
   gap: 32px;
-  padding: 50px;
+  padding: 90px;
 }
 
 .top-section {
   display: flex;
-  gap: 24px;
+  gap: 75px;
 }
 
 .image-container {
@@ -100,7 +100,6 @@
   background-color: #d9d9d9;
   padding: 16px;
   border-radius: 12px;
-  max-width: 55%;
   color: black;
 }
 
@@ -171,6 +170,7 @@
 .property-main h3 {
   font-size: 25px;
   padding-bottom: 15px;
+  padding-top: 25px;
 }
 
 .presentation {
@@ -193,10 +193,6 @@
   display: flex;
   align-items: center;
   gap: 10px;
-}
-
-.image-container {
-  position: relative;
 }
 
 .favorite-button {
@@ -237,4 +233,46 @@
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   text-align: left;
   font-style: normal;
+}
+
+.property-image {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.favorite-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: white;
+  border: none;
+  border-radius: 50%;
+  padding: 8px;
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.heart-icon {
+  font-size: 20px;
+  color: gray;
+}
+
+.heart-icon.active {
+  color: red;
+}
+
+.suitable-label {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background-color: rgba(255, 255, 255, 0.85);
+  color: #333;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  z-index: 2;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }

@@ -1,5 +1,8 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
 import {
   FaRulerCombined,
   FaDoorOpen,
@@ -29,19 +32,56 @@ export default function PropertyMain() {
 
   if (!property) return <p>Se încarcă...</p>;
 
+  const imageList = property.images?.split(",").map((img) => img.trim()) || [];
+  console.log("Imagini din slider:", imageList);
+
+  const sliderSettings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: true,
+  };
+
   return (
     <div className="property-main">
       <div className="property-title">
         <h2>{property.title}</h2>
       </div>
       <div className="top-section">
-        <div className="image-container">
-          <img
-            className="property-image"
-            src={`/images/${property.image}`}
-            alt={property.title}
-            onError={(e) => (e.target.src = "/images/default.jpg")}
-          />
+        <div
+          style={{
+            width: "100%",
+            maxWidth: "800px",
+            margin: "0 auto",
+            position: "relative",
+          }}
+        >
+          <Slider {...sliderSettings}>
+            {imageList.map((img, index) => (
+              <div key={index}>
+                <img
+                  src={`/images/${img}`}
+                  alt={`Poza ${index + 1}`}
+                  style={{
+                    width: "100%",
+                    height: "450px",
+                    objectFit: "cover",
+                    borderRadius: "8px",
+                    display: "block",
+                  }}
+                />
+              </div>
+            ))}
+          </Slider>
+
+          {property.suitable_for && (
+            <div className="suitable-label">
+              Potrivit pentru: {property.suitable_for}
+            </div>
+          )}
+
           <button
             className="favorite-button"
             onClick={() => setFavorit(!favorit)}
@@ -88,7 +128,6 @@ export default function PropertyMain() {
           )}
         </div>
       </div>
-
       <div className="presentation">
         <h3>Prezentare generală</h3>
         <div className="presentation-wrapper">
@@ -118,7 +157,6 @@ export default function PropertyMain() {
           </div>
         </div>
       </div>
-
       <div className="property-description">
         <h3>Despre această proprietate</h3>
         <div className="description-box">
