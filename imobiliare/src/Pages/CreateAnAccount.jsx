@@ -1,7 +1,84 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, TextField, Button, Typography, Link } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
+  const [errors, setErrors] = useState("");
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    lastName: "",
+    firstName: "",
+    email: "",
+    phoneNumber: "",
+    password: "",
+    confirmPassword: "",
+    document: null,
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleFileChange = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      document: e.target.files[0],
+    }));
+  };
+
+  const register = async () => {
+    if (formData.password !== formData.confirmPassword) {
+      setErrors("Parolele nu coincid.");
+      return;
+    }
+    if (
+      !formData.firstName ||
+      !formData.lastName ||
+      !formData.email ||
+      !formData.phoneNumber ||
+      !formData.password ||
+      !formData.confirmPassword ||
+      !formData.document
+    ) {
+      setErrors("Toate câmpurile sunt obligatorii.");
+      return;
+    }
+    const data = new FormData();
+    data.append("lastName", formData.lastName);
+    data.append("firstName", formData.firstName);
+    data.append("email", formData.email);
+    data.append("phoneNumber", formData.phoneNumber);
+    data.append("password", formData.password);
+    data.append("document", formData.document);
+    data.append("role", "client");
+
+    try {
+      const response = await fetch("http://localhost:8080/api/users/register", {
+        headers: {
+          Accept: "application/json",
+        },
+        method: "POST",
+        body: data,
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        setErrors(errorText);
+      } else {
+        localStorage.setItem("user", JSON.stringify(response));
+        navigate("/home");
+        setErrors("");
+      }
+    } catch (err) {
+      setErrors("Internal server error. Please contact our support.");
+      console.error(err);
+    }
+  };
+
   return (
     <Box
       sx={{
@@ -14,7 +91,7 @@ const RegisterPage = () => {
     >
       <Box
         sx={{
-          width: 400,
+          width: 600,
           bgcolor: "white",
           borderRadius: 2,
           boxShadow: 6,
@@ -24,36 +101,62 @@ const RegisterPage = () => {
         <Typography variant="h5" fontWeight="bold" align="center" gutterBottom>
           Creează cont
         </Typography>
-        <TextField
-          label="Nume complet"
-          placeholder="Introduceți numele complet"
-          variant="outlined"
-          fullWidth
-          margin="normal"
-        />
-        <TextField
-          label="Email"
-          placeholder="Introduceți email"
-          variant="outlined"
-          fullWidth
-          margin="normal"
-        />
+        <Box sx={{ display: "flex" }}>
+          <TextField
+            label="Nume"
+            name="lastName"
+            onChange={handleChange}
+            fullWidth
+            margin="normal"
+            required={true}
+          />
+          <TextField
+            label="Prenume"
+            name="firstName"
+            onChange={handleChange}
+            fullWidth
+            margin="normal"
+            required={true}
+          />
+        </Box>
+        <Box sx={{ display: "flex" }}>
+          <TextField
+            label="Email"
+            name="email"
+            onChange={handleChange}
+            fullWidth
+            margin="normal"
+            required={true}
+          />
+          <TextField
+            label="Telefon"
+            name="phoneNumber"
+            onChange={handleChange}
+            fullWidth
+            margin="normal"
+            required={true}
+          />
+        </Box>
+        <input accept="image/*" type="file" onChange={handleFileChange} />
         <TextField
           label="Parolă"
-          placeholder="Introduceți parola"
+          name="password"
           type="password"
-          variant="outlined"
+          onChange={handleChange}
           fullWidth
           margin="normal"
+          required={true}
         />
         <TextField
           label="Confirmare parolă"
-          placeholder="Reintroduceți parola"
+          name="confirmPassword"
           type="password"
-          variant="outlined"
+          onChange={handleChange}
           fullWidth
           margin="normal"
+          required={true}
         />
+        {errors ? <p style={{ color: "red" }}>{errors}</p> : <></>}
         <Button
           variant="contained"
           sx={{
@@ -66,6 +169,7 @@ const RegisterPage = () => {
               backgroundColor: "#8a664a",
             },
           }}
+          onClick={register}
           fullWidth
         >
           Înregistrare

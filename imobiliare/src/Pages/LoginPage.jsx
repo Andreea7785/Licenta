@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   TextField,
@@ -8,8 +8,59 @@ import {
   FormControlLabel,
   Link,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
+  const navigate = useNavigate();
+
+  const [errors, setErrors] = useState("");
+
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const login = async () => {
+    if (!formData.email || !formData.password) {
+      setErrors("Toate câmpurile sunt obligatorii.");
+      return;
+    }
+    const data = new FormData();
+
+    data.append("email", formData.email);
+    data.append("password", formData.password);
+
+    try {
+      const response = await fetch("http://localhost:8080/api/users/login", {
+        headers: {
+          Accept: "application/json",
+        },
+        method: "POST",
+        body: data,
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        setErrors(errorText);
+      } else {
+        localStorage.setItem("user", JSON.stringify(response));
+        navigate("/home");
+        setErrors("");
+      }
+    } catch (err) {
+      setErrors("Internal server error. Please contact our support.");
+      console.error(err);
+    }
+  };
+
   return (
     <Box
       sx={{
@@ -69,6 +120,10 @@ const LoginPage = () => {
             variant="outlined"
             fullWidth
             margin="normal"
+            name="email"
+            value={formData.email}
+            required={true}
+            onChange={handleChange}
           />
           <TextField
             label="Parolă"
@@ -76,6 +131,10 @@ const LoginPage = () => {
             variant="outlined"
             fullWidth
             margin="normal"
+            name="password"
+            value={formData.password}
+            required={true}
+            onChange={handleChange}
           />
           <Box
             sx={{
@@ -89,6 +148,8 @@ const LoginPage = () => {
               Ți-ai uitat parola?
             </Link>
           </Box>
+          {errors ? <p style={{ color: "red" }}>{errors}</p> : <></>}
+
           <Button
             variant="contained"
             sx={{
@@ -98,6 +159,7 @@ const LoginPage = () => {
               paddingY: 1.5,
             }}
             fullWidth
+            onClick={login}
           >
             Intră în cont
           </Button>

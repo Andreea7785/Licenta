@@ -8,6 +8,7 @@ import java.util.List;
 public class User {
 
         @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(name = "user_id")
         private Integer userId;
 
@@ -23,7 +24,7 @@ public class User {
         private String password;
 
         @Column(name = "phone_number")
-        private Integer phoneNumber;
+        private String phoneNumber;
 
         private String description;
 
@@ -71,8 +72,8 @@ public class User {
         public String getPassword() { return password; }
         public void setPassword(String password) { this.password = password; }
 
-        public Integer getPhoneNumber() { return phoneNumber; }
-        public void setPhoneNumber(Integer phoneNumber) { this.phoneNumber = phoneNumber; }
+        public String getPhoneNumber() { return phoneNumber; }
+        public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
 
 
         public String getDescription() { return description; }
