@@ -1,13 +1,5 @@
 import React, { useState } from "react";
-import {
-  Box,
-  TextField,
-  Button,
-  Typography,
-  Checkbox,
-  FormControlLabel,
-  Link,
-} from "@mui/material";
+import { Box, TextField, Button, Typography, Link } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
@@ -51,7 +43,8 @@ const LoginPage = () => {
         const errorText = await response.text();
         setErrors(errorText);
       } else {
-        localStorage.setItem("user", JSON.stringify(response));
+        const data = await response.text();
+        localStorage.setItem("user", data);
         navigate("/home");
         setErrors("");
       }

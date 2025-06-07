@@ -11,6 +11,7 @@ public class UserDTO {
     private String email;
     private String phoneNumber;
     private String role;
+    private byte[] document;
 
     // Constructor
     public UserDTO(User user) {
@@ -20,6 +21,7 @@ public class UserDTO {
         this.email = user.getEmail();
         this.phoneNumber = user.getPhoneNumber();
         this.role = user.getRole();
+        this.document = user.getDocument();
     }
 
 }

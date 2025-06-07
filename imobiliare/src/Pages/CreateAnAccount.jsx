@@ -69,7 +69,8 @@ const RegisterPage = () => {
         const errorText = await response.text();
         setErrors(errorText);
       } else {
-        localStorage.setItem("user", JSON.stringify(response));
+        const data = await response.text();
+        localStorage.setItem("user", data);
         navigate("/home");
         setErrors("");
       }

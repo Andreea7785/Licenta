@@ -4,7 +4,6 @@ import "./Header.css";
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const toggleMenu = () => setIsOpen((prev) => !prev);
-
   return (
     <div className="header">
       <div className="header-title">HomeDeal</div>
@@ -37,12 +36,22 @@ export default function Header() {
           {isOpen && (
             <div className="options">
               <ul>
-                <li>Informații cont</li>
-                <li><a href="/proprietati-favorite">Proprietăți favorite</a></li>
+                <li>
+                  <a href="/informatii-cont">Informații cont</a>
+                </li>
+                <li>
+                  <a href="/proprietati-favorite">Proprietăți favorite</a>
+                </li>
                 <li>Istoric vizionări</li>
-                <li>Documente încărcate</li>
                 <li>Istoric cumpărări</li>
-                <li>Logout</li>
+                <li
+                  onClick={() => {
+                    localStorage.removeItem("user");
+                    window.location.href = "/login";
+                  }}
+                >
+                  Logout
+                </li>
               </ul>
             </div>
           )}
