@@ -7,7 +7,7 @@ export default function AgentDetails() {
   const [agent, setAgent] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:8080/api/agents/${id}`)
+    fetch(`http://localhost:8080/api/users/${id}`)
       .then((res) => res.json())
       .then((data) => setAgent(data))
       .catch((err) => console.error("Eroare la fetch:", err));

@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import DownloadIcon from "@mui/icons-material/Download";
 
-export const PersonalInformations = ({ user }) => {
+export const PersonalInformations = ({ user, showDocuments, hideTitle }) => {
   const handleDownload = () => {
     const base64Data = `data:image/jpeg;base64,${user?.document}`;
     const link = document.createElement("a");
@@ -23,9 +23,13 @@ export const PersonalInformations = ({ user }) => {
   return (
     <Box>
       <Paper elevation={3} sx={{ p: 4, borderRadius: 3 }}>
-        <Typography variant="h5" align="center">
-          Informații personale
-        </Typography>
+        {!hideTitle ? (
+          <Typography variant="h5" align="center">
+            Informații personale
+          </Typography>
+        ) : (
+          <></>
+        )}
         <Typography variant="h6" marginBottom={"20px"}>
           Date utilizator
         </Typography>
@@ -67,26 +71,31 @@ export const PersonalInformations = ({ user }) => {
             />
           </Grid>
         </Grid>
+        {showDocuments ? (
+          <>
+            <Divider sx={{ my: 4 }} />
 
-        <Divider sx={{ my: 4 }} />
-
-        <Typography variant="h6" gutterBottom>
-          Documentele mele
-        </Typography>
-        <Box mt={2}>
-          <Avatar
-            src={`data:image/jpeg;base64,${user?.document}`}
-            alt="Poza profil"
-            sx={{ width: 140, height: 140 }}
-          />
-          <Button
-            variant="text"
-            onClick={handleDownload}
-            disabled={!user?.document}
-          >
-            <DownloadIcon />
-          </Button>
-        </Box>
+            <Typography variant="h6" gutterBottom>
+              Documentele mele
+            </Typography>
+            <Box mt={2}>
+              <Avatar
+                src={`data:image/jpeg;base64,${user?.document}`}
+                alt="Poza profil"
+                sx={{ width: 140, height: 140 }}
+              />
+              <Button
+                variant="text"
+                onClick={handleDownload}
+                disabled={!user?.document}
+              >
+                <DownloadIcon />
+              </Button>
+            </Box>
+          </>
+        ) : (
+          <></>
+        )}
       </Paper>
     </Box>
   );

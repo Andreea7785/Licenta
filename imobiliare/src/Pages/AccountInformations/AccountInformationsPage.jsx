@@ -11,7 +11,7 @@ export const AccountInformationsPage = () => {
       <Sidebar />
       <div className="content-area">
         <Header />
-        <PersonalInformations user={user} />
+        <PersonalInformations user={user} showDocuments={true} />
         <Footer />
       </div>
     </div>

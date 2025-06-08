@@ -47,7 +47,7 @@ export const AvailablePropMain = () => {
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/agents")
+    fetch("http://localhost:8080/api/users/agents")
       .then((res) => res.json())
       .then((data) => {
         setAgents(data);

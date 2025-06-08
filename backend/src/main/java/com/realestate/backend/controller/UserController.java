@@ -30,7 +30,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping
+    @GetMapping("/agents")
     public List<User> getAllAgents() {
         List<User> agents = userRepository.findByRole("agent");
         System.out.println("Număr agenți: " + agents.size());

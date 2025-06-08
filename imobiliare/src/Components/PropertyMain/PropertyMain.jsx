@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+
 import {
   FaRulerCombined,
   FaDoorOpen,
@@ -16,12 +17,35 @@ import {
   FaHeart,
   FaRegHeart,
 } from "react-icons/fa";
+import Modal from "@mui/material/Modal";
+
 import "./PropertyMain.css";
+import { Box, Button, Grid, Paper, TextField, Typography } from "@mui/material";
+import { PersonalInformations } from "../PersonalInformations/PersonalInformations";
+import DateTimeField from "../DateTimeField/DateTimeField";
+import dayjs from "dayjs";
 
 export default function PropertyMain() {
   const { id } = useParams();
   const [property, setProperty] = useState(null);
   const [favorit, setFavorit] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+
+  const [appointmentData, setAppointmentData] = useState({
+    date: Date.now(),
+    observations: "",
+  });
+
+  const handleClose = () => {
+    setAppointmentData({
+      date: dayjs(),
+      observations: "",
+    });
+    setSuccessMessage(null);
+
+    setIsOpen(false);
+  };
 
   useEffect(() => {
     fetch(`http://localhost:8080/api/properties/${id}`)
@@ -34,6 +58,8 @@ export default function PropertyMain() {
 
   const imageList = property.images?.split(",").map((img) => img.trim()) || [];
 
+  const user = JSON.parse(localStorage.getItem("user"));
+
   const sliderSettings = {
     dots: true,
     infinite: true,
@@ -41,6 +67,46 @@ export default function PropertyMain() {
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: true,
+  };
+
+  const createAppointment = async () => {
+    const formData = new FormData();
+    formData.append("client_id", user.id);
+    formData.append("observations", appointmentData.observations);
+    formData.append("date", dayjs(appointmentData.date).toISOString());
+    formData.append("property_id", property.property_id);
+
+    const payload = {
+      client_id: user.id,
+      observations: appointmentData.observations,
+      date: dayjs(appointmentData.date).toISOString().slice(0, 16),
+      property_id: property.property_id,
+    };
+
+    try {
+      const response = await fetch(
+        "http://localhost:8080/api/appointments/create",
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+
+          method: "POST",
+          body: JSON.stringify(payload),
+        }
+      );
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.log(errorText);
+      } else {
+        setSuccessMessage(
+          "Programarea realizata cu succes! Poti vedea programarile in in sectiunea 'Istoric'."
+        );
+      }
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
@@ -160,9 +226,94 @@ export default function PropertyMain() {
         <h3>Despre această proprietate</h3>
         <div className="description-box">
           <p>{property.description}</p>
-          <button className="schedule-button">Programează o vizionare</button>
+          <button className="schedule-button" onClick={() => setIsOpen(true)}>
+            Programează o vizionare
+          </button>
         </div>
-
+        {isOpen ? (
+          <Modal open={open} onClose={handleClose}>
+            <Box
+              sx={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                bgcolor: "background.paper",
+                boxShadow: 24,
+                p: 4,
+                borderRadius: 2,
+                minWidth: 300,
+              }}
+            >
+              <PersonalInformations
+                user={user}
+                showDocuments={false}
+                hideTitle={true}
+              />
+              <Paper elevation={3} sx={{ p: 4, borderRadius: 3, mt: 2 }}>
+                <Typography variant="h6" marginBottom={"20px"}>
+                  Date programare
+                </Typography>
+                <Grid spacing={4}>
+                  <Grid item xs={12} sm={12}>
+                    <Box sx={{ width: 300 }}>
+                      <DateTimeField
+                        value={appointmentData.date}
+                        onChange={(e) =>
+                          setAppointmentData((prev) => ({
+                            ...prev,
+                            date: e.target.value,
+                          }))
+                        }
+                      />
+                    </Box>
+                  </Grid>
+                  <Grid item xs={12} sm={12} mt={5}>
+                    <TextField
+                      label="Observatii"
+                      fullWidth
+                      name="observations"
+                      value={appointmentData.observations}
+                      variant="outlined"
+                      onChange={(e) =>
+                        setAppointmentData((prev) => ({
+                          ...prev,
+                          observations: e.target.value,
+                        }))
+                      }
+                      InputLabelProps={{ shrink: true }}
+                    />
+                  </Grid>
+                </Grid>
+              </Paper>
+              {successMessage ? (
+                <p style={{ color: "green", marginTop: "15px" }}>
+                  {successMessage}
+                </p>
+              ) : (
+                <></>
+              )}
+              <Box display="flex" justifyContent="space-between" mt={2}>
+                <Button
+                  sx={{ background: "black", color: "white" }}
+                  variant="outlined"
+                  onClick={handleClose}
+                >
+                  Anulează
+                </Button>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={createAppointment}
+                >
+                  Salvează
+                </Button>
+              </Box>
+            </Box>
+          </Modal>
+        ) : (
+          <></>
+        )}
         <h3>Locația pe hartă</h3>
         <div className="map-container">
           <iframe
