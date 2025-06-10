@@ -40,4 +40,14 @@ public class AppointmentDTO {
     public void setObservations(String observations) {
         this.observations = observations;
     }
+
+    private String status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }

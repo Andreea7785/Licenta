@@ -55,7 +55,7 @@ const RealEstateCard = ({ card }) => {
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
-        width: 320, // Lățime fixă pentru aliniere corectă
+        width: 320,
       }}
     >
       <CardMedia
@@ -83,11 +83,7 @@ const RealEstateCard = ({ card }) => {
           padding: 4,
         }}
       >
-        {isFavorite ? (
-          <FavoriteIcon color="white" />
-        ) : (
-          <FavoriteBorderIcon />
-        )}
+        {isFavorite ? <FavoriteIcon color="white" /> : <FavoriteBorderIcon />}
       </IconButton>
       <Chip
         label={`${card.rating} ★`}
@@ -117,7 +113,7 @@ const RealEstateCard = ({ card }) => {
               textOverflow: "ellipsis",
               WebkitBoxOrient: "vertical",
               WebkitLineClamp: 2,
-              height: "3em", 
+              height: "3em",
               lineHeight: "1.5em",
             }}
           >

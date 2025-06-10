@@ -101,6 +101,11 @@
   padding: 16px;
   border-radius: 12px;
   color: black;
+  padding-top: 10px;
+  margin-top: 0px;
+}
+.title-right {
+  text-align: center;
 }
 
 .property-facilities ul {

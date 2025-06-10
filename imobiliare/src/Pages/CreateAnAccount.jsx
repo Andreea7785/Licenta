@@ -102,7 +102,7 @@ const RegisterPage = () => {
         <Typography variant="h5" fontWeight="bold" align="center" gutterBottom>
           Creează cont
         </Typography>
-        <Box sx={{ display: "flex" }}>
+        <Box sx={{ display: "flex", gap: 2 }}>
           <TextField
             label="Nume"
             name="lastName"
@@ -120,7 +120,7 @@ const RegisterPage = () => {
             required={true}
           />
         </Box>
-        <Box sx={{ display: "flex" }}>
+        <Box sx={{ display: "flex", gap: 2 }}>
           <TextField
             label="Email"
             name="email"

@@ -42,8 +42,9 @@ export default function Header() {
                 <li>
                   <a href="/proprietati-favorite">Proprietăți favorite</a>
                 </li>
-                <li>Istoric vizionări</li>
-                <li>Istoric cumpărări</li>
+                <li>
+                  <a href="/istoric">Istoric</a>
+                </li>
                 <li
                   onClick={() => {
                     localStorage.removeItem("user");

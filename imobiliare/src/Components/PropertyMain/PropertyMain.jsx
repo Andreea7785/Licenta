@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 
 import {
@@ -27,13 +28,14 @@ import dayjs from "dayjs";
 
 export default function PropertyMain() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [property, setProperty] = useState(null);
   const [favorit, setFavorit] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
 
   const [appointmentData, setAppointmentData] = useState({
-    date: Date.now(),
+    date: dayjs(),
     observations: "",
   });
 
@@ -43,7 +45,7 @@ export default function PropertyMain() {
       observations: "",
     });
     setSuccessMessage(null);
-
+    navigate("/istoric");
     setIsOpen(false);
   };
 
@@ -76,13 +78,14 @@ export default function PropertyMain() {
     formData.append("date", dayjs(appointmentData.date).toISOString());
     formData.append("property_id", property.property_id);
 
+    console.log(user.id);
+
     const payload = {
       client_id: user.id,
       observations: appointmentData.observations,
       date: dayjs(appointmentData.date).toISOString().slice(0, 16),
       property_id: property.property_id,
     };
-
     try {
       const response = await fetch(
         "http://localhost:8080/api/appointments/create",
@@ -90,7 +93,6 @@ export default function PropertyMain() {
           headers: {
             "Content-Type": "application/json",
           },
-
           method: "POST",
           body: JSON.stringify(payload),
         }
@@ -101,11 +103,14 @@ export default function PropertyMain() {
         console.log(errorText);
       } else {
         setSuccessMessage(
-          "Programarea realizata cu succes! Poti vedea programarile in in sectiunea 'Istoric'."
+          "Programarea realizata cu succes! Poti vedea programarile in sectiunea 'Istoric'."
         );
+        setTimeout(() => {
+          navigate("/istoric");
+        }, 1500);
       }
     } catch (err) {
-      console.error(err);
+      console.error("Eroare la crearea programării:", err);
     }
   };
 
@@ -161,7 +166,9 @@ export default function PropertyMain() {
 
         <div className="right">
           <div className="property-details">
-            <h3>Alte Detalii</h3>
+            <div className="title-right">
+              <h3>Alte Detalii</h3>
+            </div>
             <div className="grid-info">
               <div className="info-box">
                 <FaMapMarkerAlt className="icon" />
@@ -183,7 +190,9 @@ export default function PropertyMain() {
 
           {property.facilities && property.facilities.length > 0 && (
             <div className="property-facilities">
-              <h3>Facilități</h3>
+              <div className="title-right">
+                <h3>Facilități</h3>
+              </div>
               <ul>
                 {property.facilities.map((item, index) => (
                   <li key={index}>{item}</li>
@@ -259,12 +268,13 @@ export default function PropertyMain() {
                     <Box sx={{ width: 300 }}>
                       <DateTimeField
                         value={appointmentData.date}
-                        onChange={(e) =>
+                        onChange={(e) => {
+                          console.log(e);
                           setAppointmentData((prev) => ({
                             ...prev,
-                            date: e.target.value,
-                          }))
-                        }
+                            date: e,
+                          }));
+                        }}
                       />
                     </Box>
                   </Grid>

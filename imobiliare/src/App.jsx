@@ -14,6 +14,9 @@ import LoginPage from "./Pages/LoginPage.jsx";
 import CreateAnAccount from "./Pages/CreateAnAccount.jsx";
 import { FavoriteProperties } from "./Pages/FavoriteProperties/FavoriteProperties.jsx";
 import { AccountInformationsPage } from "./Pages/AccountInformations/AccountInformationsPage.jsx";
+import ViewHistoryPage from "./Pages/ViewHistoryPage.jsx";
+import HomeAgent from "./Pages/HomeAgent.jsx";
+import Rules from "./Pages/Rules/Rules.jsx";
 
 function App() {
   return (
@@ -40,6 +43,9 @@ function App() {
         <Route path="/property/:id" element={<PropertyPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/create-an-account" element={<CreateAnAccount />} />
+        <Route path="/istoric" element={<ViewHistoryPage />} />
+        <Route path="/homeAgent" element={<HomeAgent />} />
+        <Route path="/regulament-intern" element={<Rules />} />
       </Routes>
     </BrowserRouter>
   );

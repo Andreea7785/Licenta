@@ -23,7 +23,8 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/appointments")
-@CrossOrigin(origins = "http://localhost:5173/")
+@CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+
 public class AppointmentController {
     private final UserRepository userRepository;
     private final PropertyRepository propertyRepository;
@@ -37,13 +38,17 @@ public class AppointmentController {
         this.userRepository = userRepository;
         this.propertyRepository = propertyRepository;
     }
-
-
-    // GET /api/appointments/client/5 → toate programările clientului cu ID 5
-    @GetMapping("/{clientId}")
-    public List<Appointment> getAppointmentsByClientId(@PathVariable Integer clientId) {
-        return appointmentRepository.findByClient_UserId(clientId);
+    @GetMapping("/client/{clientId}")
+    public ResponseEntity<List<Appointment>> getAppointmentsByClient(@PathVariable Integer clientId) {
+        List<Appointment> appointments = appointmentRepository.findByClient_UserId(clientId);
+        return ResponseEntity.ok(appointments);
     }
+
+//
+//    @GetMapping("/{clientId}")
+//    public List<Appointment> getAppointmentsByClientId(@PathVariable Integer clientId) {
+//        return appointmentRepository.findByClient_UserId(clientId);
+//    }
 
     @PostMapping(
             value = "/create",
@@ -81,13 +86,22 @@ public class AppointmentController {
             response.put("message", "Format invalid pentru dată. Așteptat: YYYY-MM-DDTHH:mm");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
+        appointment.setStatus("Trimis");
+
 
         appointment.setCreationDate(LocalDate.now());
 
         Appointment saved = appointmentRepository.save(appointment);
         response.put("error", false);
         response.put("message", "Programare creată cu succes.");
-        response.put("appointment", saved);
+        AppointmentDTO responseDto = new AppointmentDTO();
+        responseDto.setClient_id(saved.getClient().getUserId());
+        responseDto.setProperty_id(saved.getProperty().getProperty_id());
+        responseDto.setDate(saved.getDate().toString());
+        responseDto.setObservations(saved.getObservations());
+        responseDto.setStatus(saved.getStatus());
+
+        response.put("appointment", responseDto);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
