@@ -21,14 +21,26 @@ public class Appointment {
     @JoinColumn(name = "property_id", nullable = false)
     private Property property;
 
+    @ManyToOne
+    @JoinColumn(name = "agent_id")
+    private User agent;
+
     @Column(name = "date")
-    private LocalDateTime date;
+    private LocalDate date;
 
     @Column(name = "status", length = 15)
     private String status;
 
     @Column(name = "creation_date")
     private LocalDate creationDate;
+
+    public User getAgent() {
+        return agent;
+    }
+
+    public void setAgent(User agent) {
+        this.agent = agent;
+    }
 
     @Column(name = "observations", columnDefinition = "TEXT")
     private String observations;
@@ -59,11 +71,11 @@ public class Appointment {
         this.property = property;
     }
 
-    public LocalDateTime getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

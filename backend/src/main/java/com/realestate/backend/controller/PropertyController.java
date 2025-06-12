@@ -1,6 +1,7 @@
 package com.realestate.backend.controller;
 import com.realestate.backend.model.Property;
 import com.realestate.backend.repository.PropertyRepository;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -35,5 +36,10 @@ public class PropertyController {
         return propertyRepository.findAll();
     }
 
-
+//    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+//    public ResponseEntity<String> addProperty(@ModelAttribute PropertyDTO propertyDTO) {
+//        Property property = new Property(propertyDTO);
+//        propertyRepository.save(property);
+//        return ResponseEntity.ok("Proprietate adăugată cu succes!");
+//    }
 }

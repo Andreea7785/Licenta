@@ -16,6 +16,9 @@ import jakarta.persistence.*;
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long property_id;
 
+//        public Property(PropertyDTO propertyDTO) {
+//        }
+
         public User getAgent() {
             return agent;
         }

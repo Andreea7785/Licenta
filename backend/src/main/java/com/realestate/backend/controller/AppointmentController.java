@@ -79,7 +79,7 @@ public class AppointmentController {
 
         // parsează data din string
         try {
-            LocalDateTime parsedDate = LocalDateTime.parse(request.getDate()); // FĂRĂ .toString()
+            LocalDate parsedDate = LocalDate.parse(request.getDate()); // FĂRĂ .toString()
             appointment.setDate(parsedDate);
         } catch (DateTimeParseException e) {
             response.put("error", true);
