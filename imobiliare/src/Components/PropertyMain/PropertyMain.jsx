@@ -25,6 +25,7 @@ import { Box, Button, Grid, Paper, TextField, Typography } from "@mui/material";
 import { PersonalInformations } from "../PersonalInformations/PersonalInformations";
 import DateTimeField from "../DateTimeField/DateTimeField";
 import dayjs from "dayjs";
+import { FiLogIn } from "react-icons/fi";
 
 export default function PropertyMain() {
   const { id } = useParams();
@@ -235,9 +236,24 @@ export default function PropertyMain() {
         <h3>Despre această proprietate</h3>
         <div className="description-box">
           <p>{property.description}</p>
-          <button className="schedule-button" onClick={() => setIsOpen(true)}>
+
+          <button
+            disabled={!user}
+            className="schedule-button"
+            onClick={() => setIsOpen(true)}
+          >
             Programează o vizionare
           </button>
+          {!user ? (
+            <span>
+              Important: Conecteaza-te pentru a programa o vizionare.{" "}
+              <a href="/login" className="login-link">
+                Autentifica-te <FiLogIn />
+              </a>
+            </span>
+          ) : (
+            <></>
+          )}
         </div>
         {isOpen ? (
           <Modal open={open} onClose={handleClose}>

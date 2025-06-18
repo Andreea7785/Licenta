@@ -1,5 +1,6 @@
 package com.realestate.backend.controller;
 
+import com.realestate.backend.DTO.FirmReportDTO;
 import com.realestate.backend.DTO.MonthlyStatsDTO;
 import com.realestate.backend.DTO.TransactionReportDTO;
 import com.realestate.backend.services.ReportService;
@@ -26,6 +27,9 @@ public class ReportController {
     }
 
 
-
+    @GetMapping("/firm")
+    public FirmReportDTO getFirmReport() {
+        return reportService.getFirmReport();
+    }
 
 }

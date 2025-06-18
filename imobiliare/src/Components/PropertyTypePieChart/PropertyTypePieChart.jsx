@@ -13,8 +13,9 @@ import html2canvas from "html2canvas";
 import "./PropertyTypePieChart.css";
 
 const COLORS = ["#a47148", "#bb8b64", "#9b8b7f"];
-const PropertyTypePieChart = ({ data }) => {
+const PropertyTypePieChart = ({ data, title }) => {
   const chartRef = useRef();
+  console.log(data);
 
   const downloadExcel = async () => {
     const workbook = new ExcelJS.Workbook();
@@ -24,7 +25,6 @@ const PropertyTypePieChart = ({ data }) => {
       { header: "Tip proprietate", key: "name", width: 30 },
       { header: "Număr vânzări", key: "value", width: 20 },
     ];
-
     data.forEach((row) => {
       worksheet.addRow({
         name: row.name,
@@ -86,9 +86,8 @@ const PropertyTypePieChart = ({ data }) => {
   return (
     <>
       <div className="property-type-chart" ref={chartRef}>
-        <h2 className="property-type-title">
-          🏘️ Tipuri de proprietăți vândute
-        </h2>
+        <h2 className="property-type-title">🏘️ {title}</h2>
+
         <ResponsiveContainer width="100%" height={300}>
           <PieChart>
             <Pie

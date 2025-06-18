@@ -80,7 +80,10 @@ const MyReports = () => {
         </div>
         <div className="charts-container">
           <PriceComparisonChart data={priceData} />
-          <PropertyTypePieChart data={typeData} />
+          <PropertyTypePieChart
+            data={typeData}
+            title={"Tipuri de proprietăți vândute"}
+          />
           <MonthlyStatsChart data={monthlyStats} />
         </div>
         <FooterAgent />

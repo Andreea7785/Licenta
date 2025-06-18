@@ -45,7 +45,9 @@ const LoginPage = () => {
       } else {
         const data = await response.text();
         localStorage.setItem("user", data);
-        navigate("/home");
+        console.log(data);
+        let route = JSON.parse(data).role === "client" ? "/home" : "/dashboard";
+        navigate(route);
         setErrors("");
       }
     } catch (err) {

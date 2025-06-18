@@ -1,10 +1,7 @@
 package com.realestate.backend.services;
 
 
-import com.realestate.backend.DTO.MonthlyAppointmentsTransactionsDTO;
-import com.realestate.backend.DTO.MonthlyStatsDTO;
-import com.realestate.backend.DTO.PriceComparisonDTO;
-import com.realestate.backend.DTO.TransactionReportDTO;
+import com.realestate.backend.DTO.*;
 import com.realestate.backend.repository.AppointmentRepository;
 import com.realestate.backend.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,6 +79,27 @@ public class ReportService {
         return monthlyStats;
     }
 
+    public FirmReportDTO getFirmReport() {
+        List<Object[]> sales = transactionRepository.getMonthlyFirmSales();
+        List<MonthlySalesDTO> monthly = sales.stream()
+                .map(row -> new MonthlySalesDTO(
+                        (String) row[0],
+                        ((BigDecimal) row[1])
+                ))
+                .toList();
+
+        List<Object[]> commissions = transactionRepository.getTop4AgentCommissionsLastYear();
+        List<CommissionDTO> agentComms = commissions.stream()
+                .map(row -> new CommissionDTO((String) row[0], (BigDecimal) row[1]))
+                .toList();
+
+        List<Object[]> propertySales = transactionRepository.getSalesPerPropertyTypeLastYear();
+        List<PropertyTypeSalesDTO> propertyTypeSales = propertySales.stream()
+                .map(row -> new PropertyTypeSalesDTO((String) row[0], (BigDecimal) row[1]))
+                .toList();
+
+        return new FirmReportDTO(monthly, agentComms, propertyTypeSales);
+    }
 
 
 }

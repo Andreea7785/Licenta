@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./Pages/Home/Home.jsx";
 import TermsAndConditions from "./Pages/TermsAndConditions/TermsAndConditions";
 import PrivacyPolicy from "./Pages/PrivacyPolicy/PrivacyPolicy.jsx";
@@ -20,6 +20,14 @@ import Rules from "./Pages/Rules/Rules.jsx";
 import AddProperty from "./Pages/AddProperty/AddProperty.jsx";
 import MyReports from "./Pages/MyReports/MyReports.jsx";
 import LoadedProperties from "./Pages/LoadedProperties/LoadedProperties.jsx";
+import { FirmReports } from "./Pages/FirmReports/FirmReports.jsx";
+
+const user = JSON.parse(localStorage.getItem("user")) ?? null;
+
+const ProtectedAgentRoute = ({ children }) => {
+  if (user && user.role === "agent") return children;
+  return <Navigate to={"/home"} replace />;
+};
 
 function App() {
   return (
@@ -47,10 +55,32 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/create-an-account" element={<CreateAnAccount />} />
         <Route path="/istoric" element={<ViewHistoryPage />} />
-        <Route path="/homeAgent" element={<HomeAgent />} />
+        <Route path="/dashboard" element={<HomeAgent />} />
         <Route path="/regulament-intern" element={<Rules />} />
-        <Route path="/incarca-proprietate" element={<AddProperty />} />
-        <Route path="/rapoartele-mele" element={<MyReports />} />
+        <Route
+          path="/incarca-proprietate"
+          element={
+            <ProtectedAgentRoute>
+              <AddProperty />
+            </ProtectedAgentRoute>
+          }
+        />
+        <Route
+          path="/rapoarte-firma"
+          element={
+            <ProtectedAgentRoute>
+              <FirmReports />
+            </ProtectedAgentRoute>
+          }
+        />
+        <Route
+          path="/rapoartele-mele"
+          element={
+            <ProtectedAgentRoute>
+              <MyReports />
+            </ProtectedAgentRoute>
+          }
+        />
         <Route path="/proprietati-incarcate" element={<LoadedProperties />} />
       </Routes>
     </BrowserRouter>
