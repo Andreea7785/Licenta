@@ -25,7 +25,7 @@ export default function SidebarAgent() {
             <InfoOutlined className="icon" />
             <span>Rapoarte Firma</span>
           </a>
-          <a href="/lista-proprietati" className="nav-item">
+          <a href="/proprietati-incarcate" className="nav-item">
             <ListAltOutlined className="icon" />
             <span>Proprietăți încărcate</span>
           </a>

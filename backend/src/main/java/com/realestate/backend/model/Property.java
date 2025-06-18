@@ -4,6 +4,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import jakarta.persistence.*;
 
@@ -16,8 +18,6 @@ import jakarta.persistence.*;
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long property_id;
 
-//        public Property(PropertyDTO propertyDTO) {
-//        }
 
         public User getAgent() {
             return agent;
@@ -33,7 +33,7 @@ import jakarta.persistence.*;
         private User agent;
         private String title;
         private String description;
-        private String price;
+        private BigDecimal price;
         private String type;
         private String adress;
         private String city;
@@ -49,8 +49,17 @@ import jakarta.persistence.*;
         private String[] facilities;
 
         private Integer bathrooms;
-        private String year;
+        private Integer year;
         private String images;
+
+        public void setImages(String images) {
+            this.images = images;
+        }
+
+        public String getImages() {
+            return images;
+        }
+
         private String area;
         private Integer surface;
 
@@ -78,11 +87,11 @@ import jakarta.persistence.*;
             this.description = description;
         }
 
-        public String getPrice() {
+        public BigDecimal getPrice() {
             return price;
         }
 
-        public void setPrice(String price) {
+        public void setPrice(BigDecimal price) {
             this.price = price;
         }
 
@@ -166,20 +175,12 @@ import jakarta.persistence.*;
             this.bathrooms = bathrooms;
         }
 
-        public String getYear() {
+        public Integer getYear() {
             return year;
         }
 
-        public void setYear(String year) {
+        public void setYear(Integer year) {
             this.year = year;
-        }
-
-        public String getImages() {
-            return images;
-        }
-
-        public void setImages(String image) {
-            this.images = images;
         }
 
         public String getArea() {

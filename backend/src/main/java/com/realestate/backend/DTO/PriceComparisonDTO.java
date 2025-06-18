@@ -1,17 +1,20 @@
 package com.realestate.backend.DTO;
 
+import java.math.BigDecimal;
+
 public class PriceComparisonDTO {
     private String propertyTitle;
-    private String listedPrice;
+    private BigDecimal listedPrice;
     private double soldPrice;
 
     public PriceComparisonDTO() {}
 
-    public PriceComparisonDTO(String propertyTitle, String listedPrice, double soldPrice) {
+    public PriceComparisonDTO(String propertyTitle, BigDecimal listedPrice, double soldPrice) {
         this.propertyTitle = propertyTitle;
         this.listedPrice = listedPrice;
         this.soldPrice = soldPrice;
     }
+
 
     public String getPropertyTitle() {
         return propertyTitle;
@@ -21,11 +24,11 @@ public class PriceComparisonDTO {
         this.propertyTitle = propertyTitle;
     }
 
-    public String getListedPrice() {
+    public BigDecimal getListedPrice() {
         return listedPrice;
     }
 
-    public void setListedPrice(String listedPrice) {
+    public void setListedPrice(BigDecimal listedPrice) {
         this.listedPrice = listedPrice;
     }
 

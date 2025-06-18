@@ -29,9 +29,16 @@ const MyReports = () => {
   const [typeData, setTypeData] = useState([]);
   const [monthlyStats, setMonthlyStats] = useState([]);
 
-  const agentId = JSON.parse(localStorage.getItem("user")).id;
+  const user = JSON.parse(localStorage.getItem("user"));
+  const agentId = user ? user.id : null;
+  console.log("agentId:", agentId);
 
   useEffect(() => {
+    if (!agentId) {
+      console.warn("Nu este niciun agent conectat.");
+      return;
+    }
+
     axios
       .get(`http://localhost:8080/api/transactions/reports?agentId=${agentId}`)
       .then((res) => {

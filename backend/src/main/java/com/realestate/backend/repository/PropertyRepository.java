@@ -5,5 +5,7 @@ import java.util.List;
 
 public interface PropertyRepository extends JpaRepository<Property, Long> {
     List<Property> findTop3ByOrderByListingDateDesc();
+    List<Property> findByAgentEmail(String email);
+
 
 }

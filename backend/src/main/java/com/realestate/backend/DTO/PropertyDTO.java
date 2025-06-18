@@ -1,77 +1,168 @@
-/*
 package com.realestate.backend.DTO;
 
-import org.springframework.web.multipart.MultipartFile;
+import java.math.BigDecimal;
+import java.util.List;
 
 public class PropertyDTO {
-    private String title;
-    private String description;
-    private String type;
-    private String price;
-    private String adress;
-    private String city;
-    private String floor;
-    private String compartimentalization;
-    private int rooms;
-    private int bathrooms;
-    private int year;
-    private String area;
-    private String surface;
-    private String suitable_for;
-    private String facilities;
-    private String agent_asigned;
-    private MultipartFile[] images;
+    public String title;
+    public String description;
 
-    // Getteri și setteri
-    public String getTitle() { return title; }
-    public void setTitle(String title) { this.title = title; }
+    public String getTitle() {
+        return title;
+    }
 
-    public String getDescription() { return description; }
-    public void setDescription(String description) { this.description = description; }
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-    public String getType() { return type; }
-    public void setType(String type) { this.type = type; }
+    public String getDescription() {
+        return description;
+    }
 
-    public String getPrice() { return price; }
-    public void setPrice(String price) { this.price = price; }
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-    public String getAdress() { return adress; }
-    public void setAdress(String adress) { this.adress = adress; }
+    public String getType() {
+        return type;
+    }
 
-    public String getCity() { return city; }
-    public void setCity(String city) { this.city = city; }
+    public void setType(String type) {
+        this.type = type;
+    }
 
-    public String getFloor() { return floor; }
-    public void setFloor(String floor) { this.floor = floor; }
+    public BigDecimal getPrice() {
+        return price;
+    }
 
-    public String getCompartimentalization() { return compartimentalization; }
-    public void setCompartimentalization(String compartimentalization) { this.compartimentalization = compartimentalization; }
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
 
-    public int getRooms() { return rooms; }
-    public void setRooms(int rooms) { this.rooms = rooms; }
+    public String getAdress() {
+        return adress;
+    }
 
-    public int getBathrooms() { return bathrooms; }
-    public void setBathrooms(int bathrooms) { this.bathrooms = bathrooms; }
+    public void setAdress(String adress) {
+        this.adress = adress;
+    }
 
-    public int getYear() { return year; }
-    public void setYear(int year) { this.year = year; }
+    public String getCity() {
+        return city;
+    }
 
-    public String getArea() { return area; }
-    public void setArea(String area) { this.area = area; }
+    public void setCity(String city) {
+        this.city = city;
+    }
 
-    public String getSurface() { return surface; }
-    public void setSurface(String surface) { this.surface = surface; }
+    public String getFloor() {
+        return floor;
+    }
 
-    public String getSuitable_for() { return suitable_for; }
-    public void setSuitable_for(String suitable_for) { this.suitable_for = suitable_for; }
+    public void setFloor(String floor) {
+        this.floor = floor;
+    }
 
-    public String getFacilities() { return facilities; }
-    public void setFacilities(String facilities) { this.facilities = facilities; }
 
-    public String getAgent_asigned() { return agent_asigned; }
-    public void setAgent_asigned(String agent_asigned) { this.agent_asigned = agent_asigned; }
+    public Integer getRooms() {
+        return rooms;
+    }
 
-    public MultipartFile[] getImages() { return images; }
-    public void setImages(MultipartFile[] images) { this.images = images; }
+    public void setRooms(Integer rooms) {
+        this.rooms = rooms;
+    }
+
+    public Integer getBathrooms() {
+        return bathrooms;
+    }
+
+    public void setBathrooms(Integer bathrooms) {
+        this.bathrooms = bathrooms;
+    }
+
+    public Integer getYear() {
+        return year;
+    }
+
+    public void setYear(Integer year) {
+        this.year = year;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
+
+    public Integer getSurface() {
+        return surface;
+    }
+
+    public void setSurface(Integer surface) {
+        this.surface = surface;
+    }
+
+    public String getSuitable_for() {
+        return suitable_for;
+    }
+
+    public void setSuitable_for(String suitable_for) {
+        this.suitable_for = suitable_for;
+    }
+
+    public List<String> getFacilities() {
+        return facilities;
+    }
+
+    public void setFacilities(List<String> facilities) {
+        this.facilities = facilities;
+    }
+
+
+
+    public String getAgent_asigned() {
+        return agent_asigned;
+    }
+
+    public void setAgent_asigned(String agent_asigned) {
+        this.agent_asigned = agent_asigned;
+    }
+
+    public String type;
+    public BigDecimal price;
+    public String adress;
+    public String city;
+    public String floor;
+    private String compartmentalization;
+
+    public String getCompartmentalization() {
+        return compartmentalization;
+    }
+
+    public void setCompartmentalization(String compartmentalization) {
+        this.compartmentalization = compartmentalization;
+    }
+
+    public Integer rooms;
+    public Integer bathrooms;
+    public Integer year;
+    public String area;
+    public Integer surface;
+    public String suitable_for;
+    public List<String> facilities;
+    private List<String> images;
+
+    public List<String> getImages() {
+        return images;
+    }
+
+    public void setImages(List<String> images) {
+        this.images = images;
+    }
+
+
+    public String agent_asigned;
+
 }
-*/

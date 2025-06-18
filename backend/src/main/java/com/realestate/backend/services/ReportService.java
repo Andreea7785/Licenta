@@ -49,6 +49,7 @@ public class ReportService {
         List<MonthlyAppointmentsTransactionsDTO> monthlyStats = getMonthlyStats(agentId);
 
         return new TransactionReportDTO(priceData, typeMap, monthlyStats);
+//        return new TransactionReportDTO(null, typeMap, monthlyStats); //adaugat
     }
 
     private List<MonthlyAppointmentsTransactionsDTO> getMonthlyStats(Integer agentId) {

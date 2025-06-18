@@ -19,6 +19,7 @@ import HomeAgent from "./Pages/HomeAgent.jsx";
 import Rules from "./Pages/Rules/Rules.jsx";
 import AddProperty from "./Pages/AddProperty/AddProperty.jsx";
 import MyReports from "./Pages/MyReports/MyReports.jsx";
+import LoadedProperties from "./Pages/LoadedProperties/LoadedProperties.jsx";
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
         <Route path="/regulament-intern" element={<Rules />} />
         <Route path="/incarca-proprietate" element={<AddProperty />} />
         <Route path="/rapoartele-mele" element={<MyReports />} />
+        <Route path="/proprietati-incarcate" element={<LoadedProperties />} />
       </Routes>
     </BrowserRouter>
   );
