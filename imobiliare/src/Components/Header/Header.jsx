@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./Header.css";
 import { FiLogIn } from "react-icons/fi";
+import { Box } from "@mui/material";
+import ChatIconMenu from "../ChatIconMenu/ChatIconMenu";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -61,6 +63,11 @@ export default function Header() {
                   </li>
                 </ul>
               </div>
+            )}
+            {userId && (
+              <Box>
+                <ChatIconMenu />
+              </Box>
             )}
           </div>
         ) : (

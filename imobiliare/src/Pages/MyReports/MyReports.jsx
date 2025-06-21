@@ -31,7 +31,7 @@ const MyReports = () => {
 
   const user = JSON.parse(localStorage.getItem("user"));
   const agentId = user ? user.id : null;
-  console.log("agentId:", agentId);
+  "agentId:", agentId;
 
   useEffect(() => {
     if (!agentId) {

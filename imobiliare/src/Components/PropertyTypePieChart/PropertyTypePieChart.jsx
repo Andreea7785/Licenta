@@ -15,7 +15,7 @@ import "./PropertyTypePieChart.css";
 const COLORS = ["#a47148", "#bb8b64", "#9b8b7f"];
 const PropertyTypePieChart = ({ data, title }) => {
   const chartRef = useRef();
-  console.log(data);
+  data;
 
   const downloadExcel = async () => {
     const workbook = new ExcelJS.Workbook();

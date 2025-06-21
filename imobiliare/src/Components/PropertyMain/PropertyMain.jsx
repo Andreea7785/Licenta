@@ -26,6 +26,7 @@ import { PersonalInformations } from "../PersonalInformations/PersonalInformatio
 import DateTimeField from "../DateTimeField/DateTimeField";
 import dayjs from "dayjs";
 import { FiLogIn } from "react-icons/fi";
+import StartUserChatButton from "../StartUserChatButton/StartUserChatButton";
 
 export default function PropertyMain() {
   const { id } = useParams();
@@ -79,7 +80,7 @@ export default function PropertyMain() {
     formData.append("date", dayjs(appointmentData.date).toISOString());
     formData.append("property_id", property.property_id);
 
-    console.log(user.id);
+    user.id;
 
     const payload = {
       client_id: user.id,
@@ -101,7 +102,7 @@ export default function PropertyMain() {
 
       if (!response.ok) {
         const errorText = await response.text();
-        console.log(errorText);
+        errorText;
       } else {
         setSuccessMessage(
           "Programarea realizata cu succes! Poti vedea programarile in sectiunea 'Istoric'."
@@ -244,6 +245,7 @@ export default function PropertyMain() {
           >
             Programează o vizionare
           </button>
+          <StartUserChatButton agentId={property.agent.userId} />
           {!user ? (
             <span>
               Important: Conecteaza-te pentru a programa o vizionare.{" "}
@@ -285,7 +287,7 @@ export default function PropertyMain() {
                       <DateTimeField
                         value={appointmentData.date}
                         onChange={(e) => {
-                          console.log(e);
+                          e;
                           setAppointmentData((prev) => ({
                             ...prev,
                             date: e,

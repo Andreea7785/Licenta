@@ -45,7 +45,7 @@ const LoginPage = () => {
       } else {
         const data = await response.text();
         localStorage.setItem("user", data);
-        console.log(data);
+        data;
         let route = JSON.parse(data).role === "client" ? "/home" : "/dashboard";
         navigate(route);
         setErrors("");

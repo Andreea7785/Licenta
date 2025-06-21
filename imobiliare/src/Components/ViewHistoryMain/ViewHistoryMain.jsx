@@ -44,9 +44,9 @@ const ViewHistoryMain = () => {
   }, [location.pathname]); // 🔁 reapelează când se schimbă pagina
 
   const handleChange = (_, newValue) => setTab(newValue);
-  console.log(viewings);
+  viewings;
   viewings.forEach((v, i) => {
-    console.log(`Vizionare ${i}:`, v);
+    `Vizionare ${i}:`, v;
   });
 
   return (

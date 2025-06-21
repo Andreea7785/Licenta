@@ -116,7 +116,7 @@ export default function AddPropertyMain() {
         body: JSON.stringify(propertyToSend),
       });
 
-      console.log("Răspuns backend:", response);
+      "Răspuns backend:", response;
 
       if (response.ok) {
         setSubmitMessage("Proprietate încărcată cu succes!");
