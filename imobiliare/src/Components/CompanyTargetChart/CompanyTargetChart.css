@@ -1,0 +1,36 @@
+.company-target-chart {
+  background-color: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  margin: 50px;
+  margin-top: 0px;
+  max-width: 95%;
+}
+
+.company-target-title {
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #0b3d91;
+  margin-bottom: 1rem;
+}
+
+.download-btn {
+  background-color: #ffd100;
+  color: #0b3d91;
+  padding: 0.6rem 1.4rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.download-btn:hover {
+  background-color: #e6bc00;
+  font-weight: 600;
+  transform: translateY(-1px);
+}

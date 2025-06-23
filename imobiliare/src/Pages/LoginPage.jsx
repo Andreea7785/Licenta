@@ -61,7 +61,7 @@ const LoginPage = () => {
       sx={{
         display: "flex",
         minHeight: "100vh",
-        background: "#e3ded9",
+        background: "#B2BCC7",
         alignItems: "center",
         justifyContent: "center",
       }}
@@ -79,7 +79,7 @@ const LoginPage = () => {
         <Box
           sx={{
             flex: 1,
-            backgroundColor: "#a88a75",
+            backgroundColor: "#002147",
             color: "white",
             display: "flex",
             flexDirection: "column",
@@ -139,7 +139,17 @@ const LoginPage = () => {
               marginY: 1,
             }}
           >
-            <Link href="#" underline="hover" color="black">
+            <Link
+              href="#"
+              underline="hover"
+              sx={{
+                color: "black",
+                "&:hover": {
+                  color: "black",
+                  cursor: "pointer",
+                },
+              }}
+            >
               Ți-ai uitat parola?
             </Link>
           </Box>
@@ -148,7 +158,7 @@ const LoginPage = () => {
           <Button
             variant="contained"
             sx={{
-              background: "#c5a392",
+              background: "#002147",
               color: "white",
               marginY: 2,
               paddingY: 1.5,
@@ -160,7 +170,17 @@ const LoginPage = () => {
           </Button>
           <Typography variant="body2" align="center">
             Nu ai cont?{" "}
-            <Link href="/create-an-account" sx={{ color: "black" }}>
+            <Link
+              href="/create-an-account"
+              sx={{
+                color: "black",
+                textDecoration: "none",
+                "&:hover": {
+                  color: "black",
+                  cursor: "pointer",
+                },
+              }}
+            >
               Creează un cont
             </Link>
           </Typography>

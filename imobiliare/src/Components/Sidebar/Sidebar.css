@@ -16,10 +16,6 @@
   box-sizing: unset;
 }
 
-.sidebar {
-  background-color: #b89283;
-}
-
 a:hover {
   font-weight: bold;
 }
@@ -30,14 +26,20 @@ a:hover {
 }
 .logo-menu img {
   max-width: 80%;
+  border-radius: 100px;
 }
 
 .sidebar-content {
   position: fixed;
-  width: 210px;
+  width: 190px;
   box-sizing: unset;
+  background-color: #002147;
 }
 
 .box-sizing-unset {
   box-sizing: unset;
+}
+
+.icon-info {
+  color: white;
 }

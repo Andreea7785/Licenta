@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import "./FirmReports.css";
 import SidebarAgent from "../../Components/SidebarAgent/SidebarAgent.jsx";
 import Header from "../../Components/Header/Header.jsx";
 import TopAgentsChart from "../../Components/TopAgentsChart/TopAgentsChart.jsx";
@@ -11,7 +11,7 @@ import PropertyTypePieChart from "../../Components/PropertyTypePieChart/Property
 // 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
 const FirmReports = () => {
   const [data, setData] = useState(null);
-  const target = 50000;
+  const target = 500000;
 
   useEffect(() => {
     axios
@@ -46,10 +46,12 @@ const FirmReports = () => {
 
         <div className="charts-container">
           <TopAgentsChart data={data.topAgentCommissions} />
+          <br></br>
           <CompanyTargetChart data={data.monthlySales} target={target} />
+          <br></br>
           <PropertyTypePieChart
             data={data.propertyTypeSales}
-            title="Valoare per tip de proprietate"
+            title="Distribuția valorii vânzărilor pe tipuri de proprietăți"
           />
         </div>
 

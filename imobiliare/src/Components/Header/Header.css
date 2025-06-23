@@ -3,7 +3,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 24px;
-  background-color: #e3ded9;
+  background-color: #002147;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-left: 30px;
 }
@@ -13,23 +13,10 @@
   gap: 30px;
 }
 .header-title {
-  margin-left: 30px;
+  margin-left: 35px;
   font-size: 30px;
   font-weight: bold;
-}
-
-.header-search {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.header-search input {
-  border: 1px solid #ccc;
-  padding: 8px;
-  padding-right: 0px;
-  border-radius: 8px;
+  color: white;
 }
 
 .profile-container {
@@ -53,6 +40,7 @@
   font-size: 24px;
   cursor: pointer;
   padding-left: 0px;
+  color: white;
   padding-right: 0px;
 }
 
@@ -96,7 +84,7 @@
 
 .login-btn {
   text-decoration: none;
-  background-color: #d5bba9;
+  background-color: #b9d9eb;
   padding: 6px;
   color: black;
   border-radius: 6px;

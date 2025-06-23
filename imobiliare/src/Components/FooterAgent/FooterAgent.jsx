@@ -10,11 +10,7 @@ export default function FooterAgent() {
       </div>
       <div className="footer-center">
         <h1>Resurse utile</h1>
-        <a
-          href="/termeni-si-conditii"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <a href="/ghid-agenti" target="_blank" rel="noopener noreferrer">
           Ghid pentru agenți
         </a>
         <br></br>
@@ -22,7 +18,11 @@ export default function FooterAgent() {
           Regulament intern
         </a>
         <br></br>
-        <a href="/QA" target="_blank" rel="noopener noreferrer">
+        <a
+          href="/intrebari-frecvente-agent"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           Întrebări frecvente
         </a>
       </div>

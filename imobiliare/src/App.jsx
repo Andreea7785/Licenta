@@ -15,7 +15,6 @@ import CreateAnAccount from "./Pages/CreateAnAccount.jsx";
 import { FavoriteProperties } from "./Pages/FavoriteProperties/FavoriteProperties.jsx";
 import { AccountInformationsPage } from "./Pages/AccountInformations/AccountInformationsPage.jsx";
 import ViewHistoryPage from "./Pages/ViewHistoryPage.jsx";
-import HomeAgent from "./Pages/HomeAgent.jsx";
 import Rules from "./Pages/Rules/Rules.jsx";
 import AddProperty from "./Pages/AddProperty/AddProperty.jsx";
 import MyReports from "./Pages/MyReports/MyReports.jsx";
@@ -25,6 +24,9 @@ import ChatBot from "./Components/ChatBot/ChatBot.jsx";
 import ChatApp from "./Components/ChatUser/ChatUser.jsx";
 import { ChatProvider } from "./context/ChatContext.jsx";
 import ChatWindow from "./Components/ChatWindow/ChatWindow.jsx";
+import SalesHistory from "./Pages/SalesHistory.jsx";
+import Guide from "./Pages/Guide.jsx";
+import FAQAgent from "./Pages/FAQAgent.jsx";
 
 const user = JSON.parse(localStorage.getItem("user")) ?? null;
 
@@ -42,7 +44,7 @@ function App() {
         <ChatWindow />
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<LoginPage />} />
             <Route path="/home" element={<Home />} />
             <Route
               path="/termeni-si-conditii"
@@ -64,6 +66,7 @@ function App() {
               path="/informatii-cont"
               element={<AccountInformationsPage />}
             />
+
             <Route
               path="/proprietati-favorite"
               element={<FavoriteProperties />}
@@ -73,7 +76,7 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/create-an-account" element={<CreateAnAccount />} />
             <Route path="/istoric" element={<ViewHistoryPage />} />
-            <Route path="/dashboard" element={<HomeAgent />} />
+            <Route path="/dashboard" element={<FirmReports />} />
             <Route path="/regulament-intern" element={<Rules />} />
             <Route
               path="/incarca-proprietate"
@@ -103,6 +106,10 @@ function App() {
               path="/proprietati-incarcate"
               element={<LoadedProperties />}
             />
+
+            <Route path="/istoric-vanzari" element={<SalesHistory />} />
+            <Route path="/ghid-agenti" element={<Guide />} />
+            <Route path="/intrebari-frecvente-agent" element={<FAQAgent />} />
           </Routes>
         </BrowserRouter>
       </ChatProvider>

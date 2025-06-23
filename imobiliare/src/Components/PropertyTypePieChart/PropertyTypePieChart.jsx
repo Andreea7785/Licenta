@@ -11,8 +11,7 @@ import ExcelJS from "exceljs";
 import { saveAs } from "file-saver";
 import html2canvas from "html2canvas";
 import "./PropertyTypePieChart.css";
-
-const COLORS = ["#a47148", "#bb8b64", "#9b8b7f"];
+const COLORS = ["#004e89", "#79a8a9", "#6c757d "];
 const PropertyTypePieChart = ({ data, title }) => {
   const chartRef = useRef();
   data;

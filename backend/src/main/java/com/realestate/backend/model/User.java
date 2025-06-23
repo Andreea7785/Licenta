@@ -81,4 +81,8 @@ public class User {
 
         public byte[] getDocument() { return document; }
         public void setDocument(byte[] document) { this.document = document; }
+
+        public String getFullName(){
+                return this.firstname + " " + this.lastname;
+        }
 }

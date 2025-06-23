@@ -85,7 +85,7 @@ const RegisterPage = () => {
       sx={{
         display: "flex",
         minHeight: "100vh",
-        background: "linear-gradient(to right, #f5f5dc, #d2b48c, #c5a392)",
+        backgroundColor: "#193759",
         alignItems: "center",
         justifyContent: "center",
       }}
@@ -161,13 +161,13 @@ const RegisterPage = () => {
         <Button
           variant="contained"
           sx={{
-            backgroundColor: "#c5a392",
+            backgroundColor: "#B2BCC7",
             color: "white",
             marginTop: 3,
             paddingY: 1.5,
             borderRadius: 5,
             "&:hover": {
-              backgroundColor: "#8a664a",
+              backgroundColor: "#99a6b5",
             },
           }}
           onClick={register}

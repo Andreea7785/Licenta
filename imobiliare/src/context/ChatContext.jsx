@@ -15,17 +15,24 @@ export const ChatProvider = ({ children }) => {
   const [stompClient, setStompClient] = useState(null);
   const [conversations, setConversations] = useState([]);
   const [activeChat, setActiveChat] = useState(null);
+  const [propertyId, setPropertyId] = useState(null);
   const [messages, setMessages] = useState({});
   const [unreadCounts, setUnreadCounts] = useState({});
-
+  console.log(messages);
   const clientRef = useRef(null);
   const user = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
     if (!user || clientRef.current) return;
 
+    fetch(`http://localhost:8080/api/conversations?userId=${user.id}`)
+      .then((res) => res.json())
+      .then((data) => setConversations(data))
+      .catch((err) => console.error("Eroare conversații", err));
+
     const socket = new SockJS("http://localhost:8080/chat-websocket");
     const client = over(socket);
+
     client.connect({ userId: user.id }, () => {
       client.subscribe("/user/queue/messages", (msg) => {
         const message = JSON.parse(msg.body);
@@ -67,10 +74,12 @@ export const ChatProvider = ({ children }) => {
   }, [user, activeChat]);
 
   const sendMessage = (receiverId, content) => {
+    console.log(propertyId);
     const msg = {
       senderId: user.id,
       receiverId,
       content,
+      propertyId: propertyId,
     };
     stompClient.send(
       `/app/chat.private.${receiverId}`,
@@ -97,8 +106,10 @@ export const ChatProvider = ({ children }) => {
     });
   };
 
-  const openChatWith = async (userId) => {
+  const openChatWith = async (userId, propertyId) => {
+    console.log(propertyId);
     setActiveChat(userId);
+    setPropertyId(propertyId);
     setUnreadCounts((prev) => ({ ...prev, [userId]: 0 }));
 
     if (!messages[userId]) {

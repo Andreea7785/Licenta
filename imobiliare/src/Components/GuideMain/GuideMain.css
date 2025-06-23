@@ -1,0 +1,76 @@
+.agent-guide-container {
+  padding: 50px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: black;
+  line-height: 1.6;
+  padding-left: 70px;
+}
+
+.agent-guide-container h1 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+  font-size: 35px;
+  color: #2b2d42;
+  text-align: center;
+  margin-top: 15px;
+}
+
+.agent-guide-container h2 {
+  font-size: 1.4rem;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 5px;
+  color: black;
+}
+
+.agent-guide-container h3 {
+  font-size: 1.1rem;
+  margin-top: 20px;
+  color: #2c3e50;
+  font-weight: bold;
+}
+
+.agent-guide-container ul {
+  margin-left: 20px;
+  margin-bottom: 15px;
+  list-style-type: disc;
+}
+
+.agent-guide-container ul ul {
+  list-style-type: circle;
+  margin-left: 20px;
+}
+
+.agent-guide-container li {
+  margin-bottom: 8px;
+}
+
+.agent-guide-container p.tip {
+  color: #046c4e;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.agent-guide-container p {
+  text-indent: 30px;
+}
+
+.agent-guide-container a {
+  text-decoration: none;
+  color: #000;
+  font-weight: normal;
+}
+
+.agent-guide-container a:hover {
+  text-decoration: none;
+  color: #34495e;
+  font-weight: normal;
+  cursor: pointer;
+}
+
+.content-area h2 {
+  font-weight: 500;
+  padding-left: 0px;
+}

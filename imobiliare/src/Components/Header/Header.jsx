@@ -1,45 +1,37 @@
 import React, { useState } from "react";
 import "./Header.css";
 import { FiLogIn } from "react-icons/fi";
-import { Box } from "@mui/material";
+import { Box, Avatar } from "@mui/material";
 import ChatIconMenu from "../ChatIconMenu/ChatIconMenu";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const toggleMenu = () => setIsOpen((prev) => !prev);
 
-  const userId = JSON.parse(localStorage.getItem("user"))
-    ? JSON.parse(localStorage.getItem("user")).id
-    : null;
+  const user = JSON.parse(localStorage.getItem("user"));
+  const userId = user?.id;
+  const userRole = user?.role;
 
   return (
     <div className="header">
       <div className="header-title">HomeDeal</div>
       <div className="header-right">
-        <div className="header-search">
-          <img
-            src="https://cdn-icons-png.flaticon.com/128/149/149852.png"
-            alt="icon search"
-            className="icon-search"
-          />
-          <input
-            type="text"
-            name="search"
-            id="id"
-            placeholder="Caută imobiliare"
-          />
-        </div>
         {userId ? (
           <div className="profile-container">
-            <img
-              src="https://cdn-icons-png.flaticon.com/128/6997/6997662.png"
-              alt="Profile"
-              className="profile-image"
-            />
-
-            <button onClick={toggleMenu} className="arrow-button">
-              &#8595;
-            </button>
+            <div onClick={toggleMenu} style={{ cursor: "pointer" }}>
+              <Avatar
+                sx={{
+                  bgcolor: "#fff",
+                  color: "#002147",
+                  border: "2px solid #002147",
+                  width: 40,
+                  height: 40,
+                  fontWeight: "bold",
+                }}
+              >
+                {user?.firstname?.charAt(0).toUpperCase()}
+              </Avatar>
+            </div>
 
             {isOpen && (
               <div className="options">
@@ -47,12 +39,18 @@ export default function Header() {
                   <li>
                     <a href="/informatii-cont">Informații cont</a>
                   </li>
-                  <li>
-                    <a href="/proprietati-favorite">Proprietăți favorite</a>
-                  </li>
-                  <li>
-                    <a href="/istoric">Istoric</a>
-                  </li>
+
+                  {userRole !== "agent" && (
+                    <>
+                      <li>
+                        <a href="/proprietati-favorite">Proprietăți favorite</a>
+                      </li>
+                      <li>
+                        <a href="/istoric">Istoric</a>
+                      </li>
+                    </>
+                  )}
+
                   <li
                     onClick={() => {
                       localStorage.removeItem("user");
@@ -64,15 +62,14 @@ export default function Header() {
                 </ul>
               </div>
             )}
-            {userId && (
-              <Box>
-                <ChatIconMenu />
-              </Box>
-            )}
+
+            <Box>
+              <ChatIconMenu />
+            </Box>
           </div>
         ) : (
           <a href="/login" className="login-btn">
-            Autentifica-te <FiLogIn />
+            Autentifică-te <FiLogIn />
           </a>
         )}
       </div>

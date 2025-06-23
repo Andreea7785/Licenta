@@ -1,5 +1,5 @@
 .Terms {
-  background-color: #d1baa7;
+  background-color: white;
 }
 
 .content {
@@ -36,6 +36,5 @@
 }
 
 a:hover {
-  color: #958a8e;
   font-weight: bold;
 }

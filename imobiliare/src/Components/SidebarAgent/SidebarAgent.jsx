@@ -23,15 +23,11 @@ export default function SidebarAgent() {
         <div className="navigation">
           <a href="/rapoarte-firma" className="nav-item">
             <InfoOutlined className="icon" />
-            <span>Rapoarte Firma</span>
+            <span>Rapoartele firmei</span>
           </a>
           <a href="/proprietati-incarcate" className="nav-item">
             <ListAltOutlined className="icon" />
-            <span>Proprietăți încărcate</span>
-          </a>
-          <a href="/clienti" className="nav-item">
-            <PeopleAltOutlined className="icon" />
-            <span>Clienți</span>
+            <span>Proprietățile mele</span>
           </a>
           <a href="/vizionari" className="nav-item">
             <EventNoteOutlined className="icon" />

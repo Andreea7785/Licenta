@@ -72,7 +72,7 @@ export default function PropertyMain() {
     slidesToScroll: 1,
     arrows: true,
   };
-
+  console.log(property.property_id);
   const createAppointment = async () => {
     const formData = new FormData();
     formData.append("client_id", user.id);
@@ -245,7 +245,10 @@ export default function PropertyMain() {
           >
             Programează o vizionare
           </button>
-          <StartUserChatButton agentId={property.agent.userId} />
+          <StartUserChatButton
+            agentId={property.agent.userId}
+            propertyId={property.property_id}
+          />
           {!user ? (
             <span>
               Important: Conecteaza-te pentru a programa o vizionare.{" "}

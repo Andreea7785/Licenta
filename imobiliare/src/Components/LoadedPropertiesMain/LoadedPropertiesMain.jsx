@@ -4,7 +4,7 @@ import { Grid, Typography, Box } from "@mui/material";
 
 export default function LoadedPropertiesMain() {
   const [properties, setProperties] = useState([]);
-  const currentEmail = localStorage.getItem("agent_email");
+  const currentEmail = JSON.parse(localStorage.getItem("user")).email;
 
   useEffect(() => {
     if (!currentEmail) return;
@@ -38,21 +38,24 @@ export default function LoadedPropertiesMain() {
   }, [currentEmail]);
 
   return (
-    <Box sx={{ padding: "50px" }}>
+    <Box sx={{ padding: "50px", backgroundColor: "#FFFFFF " }}>
       <Typography
         variant="h4"
         gutterBottom
         sx={{
-          fontWeight: "bold",
-          color: "black",
-          fontSize: "27px",
+          fontSize: "35px",
+          fontStyle: "normal",
+          marginTop: "15px",
           textAlign: "center",
-          mb: 4,
+          fontWeight: "bold",
+          color: "#2b2d42",
+          textShadow: "1px 1px 3px rgba(0, 0, 0, 0.2)",
+          pb: "60px",
         }}
       >
         Proprietățile mele
       </Typography>
-      <Grid container spacing={4} justifyContent="center">
+      <Grid container spacing={10} justifyContent="center">
         {properties.map((card) => (
           <Grid
             item

@@ -39,7 +39,7 @@ const PriceComparisonChart = ({ data }) => {
       cell.fill = {
         type: "pattern",
         pattern: "solid",
-        fgColor: { argb: "FFEBDCCB" },
+        fgColor: { argb: "#08265a" },
       };
       cell.font = { bold: true };
       cell.alignment = { vertical: "middle", horizontal: "center" };
@@ -58,7 +58,7 @@ const PriceComparisonChart = ({ data }) => {
         cell.fill = {
           type: "pattern",
           pattern: "solid",
-          fgColor: { argb: "FFFDF6F0" },
+          fgColor: { argb: "#08265a" },
         };
         cell.alignment = { vertical: "middle", horizontal: "center" };
         cell.border = {
@@ -102,8 +102,8 @@ const PriceComparisonChart = ({ data }) => {
             <YAxis />
             <Tooltip />
             <Legend />
-            <Bar dataKey="Listat" fill="#c3b091" />
-            <Bar dataKey="Vândut" fill="#d9b99b" />
+            <Bar dataKey="Listat" fill="#7f90a3" />
+            <Bar dataKey="Vândut" fill="#324D6B" />
           </BarChart>
         </ResponsiveContainer>
       </div>

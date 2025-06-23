@@ -10,13 +10,12 @@
 }
 
 .property-type-title {
-  font-size: 24px;
   text-align: center;
-  margin-bottom: 30px;
-  margin-top: 30px;
-  color: #2b2d42;
-  font-weight: bold;
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #002147;
+  margin-bottom: 5px;
+  margin-top: 5px;
 }
 
 .button-row-inside-card {

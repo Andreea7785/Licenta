@@ -1,121 +1,16 @@
 import React, { useState } from "react";
 import "./ChatBot.css";
 
-import ChatIcon from "@mui/icons-material/ChatBubbleOutline";
 import CloseIcon from "@mui/icons-material/Close";
 import SendIcon from "@mui/icons-material/Send";
 import SmartToyIcon from "@mui/icons-material/SmartToy";
 
 const ChatBot = () => {
-  const latest = [
-    {
-      property_id: 52,
-      agent: {
-        userId: 7,
-        role: "agent",
-        firstname: "Elena",
-        lastname: "Radu",
-        email: "elena.radu@homedeal.com",
-        password: "1234",
-        phoneNumber: "711003344",
-        description:
-          "Elena este cunoscută pentru intermedierea vânzărilor către românii din diaspora. A contribuit la peste 50 de tranzacții internaționale și are o rețea extinsă de colaboratori externi.",
-        document: null,
-        profilePicture: "agent7.jpg",
-        title: "Lucrează cu clienți din diaspora",
-      },
-      title: "test",
-      description: "te",
-      price: 3333,
-      type: "apartament",
-      adress: "dacia",
-      city: "",
-      floor: "3",
-      compartmentalization: null,
-      rooms: 4,
-      suitable_for: "eef",
-      facilities: ["tet:345m"],
-      bathrooms: 3,
-      year: 2009,
-      images: "POZAaa.jpg",
-      area: "efe",
-      surface: 333,
-      listing_date: "2025-06-18",
-    },
-    {
-      property_id: 51,
-      agent: {
-        userId: 7,
-        role: "agent",
-        firstname: "Elena",
-        lastname: "Radu",
-        email: "elena.radu@homedeal.com",
-        password: "1234",
-        phoneNumber: "711003344",
-        description:
-          "Elena este cunoscută pentru intermedierea vânzărilor către românii din diaspora. A contribuit la peste 50 de tranzacții internaționale și are o rețea extinsă de colaboratori externi.",
-        document: null,
-        profilePicture: "agent7.jpg",
-        title: "Lucrează cu clienți din diaspora",
-      },
-      title: "test",
-      description: "test",
-      price: 2,
-      type: "apartament",
-      adress: "dacia",
-      city: "",
-      floor: "5",
-      compartmentalization: null,
-      rooms: 1,
-      suitable_for: "dada",
-      facilities: ["test:23m"],
-      bathrooms: 1,
-      year: 2000,
-      images: "poza.jpg",
-      area: "dacia",
-      surface: 555,
-      listing_date: "2025-06-18",
-    },
-    {
-      property_id: 53,
-      agent: {
-        userId: 7,
-        role: "agent",
-        firstname: "Elena",
-        lastname: "Radu",
-        email: "elena.radu@homedeal.com",
-        password: "1234",
-        phoneNumber: "711003344",
-        description:
-          "Elena este cunoscută pentru intermedierea vânzărilor către românii din diaspora. A contribuit la peste 50 de tranzacții internaționale și are o rețea extinsă de colaboratori externi.",
-        document: null,
-        profilePicture: "agent7.jpg",
-        title: "Lucrează cu clienți din diaspora",
-      },
-      title: "test",
-      description: "test",
-      price: 344,
-      type: "casă",
-      adress: "dacia",
-      city: "",
-      floor: "3",
-      compartmentalization: null,
-      rooms: 2,
-      suitable_for: "dada",
-      facilities: ["test:200m"],
-      bathrooms: 1,
-      year: 2009,
-      images: "poza.jpg",
-      area: "dacia",
-      surface: 222,
-      listing_date: "2025-06-18",
-    },
-  ];
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
     {
       role: "system",
-      content: `Ești un asistent virtual prietenos care răspunde întrebărilor utilizatorilor despre compania noastră de imobiliare. Oferi informații generale, program de lucru, servicii disponibile și răspunzi politicos, pe scurt. Acestea sunt anunturile: ${latest}`,
+      content: `Ești un asistent virtual prietenos care răspunde întrebărilor utilizatorilor despre compania noastră de imobiliare. Oferi informații generale, program de lucru, servicii disponibile și răspunzi politicos, pe scurt`,
     },
     { role: "assistant", content: "Salut! Cu ce te pot ajuta?" },
   ]);

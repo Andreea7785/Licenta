@@ -65,4 +65,7 @@ public interface TransactionRepository extends CrudRepository<Transaction, Integ
 """, nativeQuery = true)
     List<Object[]> getSalesPerPropertyTypeLastYear();
 
+    @Query("SELECT t FROM Transaction t WHERE t.agentId = :agentId ORDER BY t.date DESC")
+    List<Transaction> findTransactionsByAgentId(@Param("agentId") Integer agentId);
+
 }

@@ -24,17 +24,17 @@ const ChatIconMenu = () => {
   const handleClose = () => setAnchorEl(null);
 
   const handleSelectChat = (userId) => {
-    openChatWith(userId);
+    const propertyId = conversations[0].propertyId;
+
+    openChatWith(userId, propertyId);
     handleClose();
   };
-
+  console.log(conversations);
   return (
     <>
       <IconButton color="inherit" onClick={handleOpen}>
         <Badge badgeContent={totalUnread} color="error">
-          <MessageIcon
-            sx={{ color: "#c5a392", width: "unset", height: "80" }}
-          />
+          <MessageIcon sx={{ color: "white", width: "unset", height: "80" }} />
         </Badge>
       </IconButton>
 

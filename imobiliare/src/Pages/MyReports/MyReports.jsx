@@ -3,10 +3,10 @@ import axios from "axios";
 import PriceComparisonChart from "../../Components/PriceComparisionChart/PriceComparisonChart.jsx";
 import PropertyTypePieChart from "../../Components/PropertyTypePieChart/PropertyTypePieChart.jsx";
 import MonthlyStatsChart from "../../Components/MonthlyStatsChart/MonthlyStatsChart.jsx";
-import Header from "../../Components/Header/Header.jsx";
 import FooterAgent from "../../Components/FooterAgent/FooterAgent.jsx";
 import SidebarAgent from "../../Components/SidebarAgent/SidebarAgent.jsx";
 import "./MyReports.css";
+import Header from "../../Components/Header/Header.jsx";
 
 const MONTHS = [
   "",
@@ -76,7 +76,7 @@ const MyReports = () => {
       <div className="content-area">
         <Header />
         <div className="title">
-          <h2>Rapoartele privind tranzacțiile mele</h2>
+          <h2>Rapoarte privind tranzacțiile mele</h2>
         </div>
         <div className="charts-container">
           <PriceComparisonChart data={priceData} />

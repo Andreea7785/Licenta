@@ -1,0 +1,38 @@
+.sales-history-container {
+  min-height: 70vh;
+  padding: 50px;
+  padding-bottom: 100px;
+}
+
+.sales-history-title {
+  margin-bottom: 35px;
+  color: #002147;
+  text-align: left;
+  padding-bottom: 18px;
+  font-size: 32px;
+}
+
+.sales-history-paper {
+  padding: 24px;
+  background-color: #f5f9ff;
+  overflow-x: auto;
+}
+
+.sales-history-table {
+  min-width: 650px;
+}
+
+.sales-history-header {
+  background-color: #e3ecf9;
+  font-weight: bold;
+}
+
+.sales-history-header th {
+  font-weight: bold;
+  color: #1a2a42;
+}
+
+.sales-history-row:hover {
+  background-color: #f0f4fc;
+  transition: background-color 0.3s ease;
+}

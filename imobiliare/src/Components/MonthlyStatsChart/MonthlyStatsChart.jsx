@@ -99,12 +99,8 @@ const MonthlyStatsChart = ({ data }) => {
 
             <Tooltip />
             <Legend />
-            <Bar
-              dataKey="appointments"
-              fill="rgb(108, 93, 77)"
-              name="Programări"
-            />
-            <Bar dataKey="transactions" fill="	#aa9b82" name="Tranzacții" />
+            <Bar dataKey="appointments" fill="#00585E" name="Programări" />
+            <Bar dataKey="transactions" fill="#004645" name="Tranzacții" />
           </BarChart>
         </ResponsiveContainer>
       </div>
