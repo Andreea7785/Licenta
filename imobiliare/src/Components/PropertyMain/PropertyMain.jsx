@@ -52,7 +52,6 @@ export default function PropertyMain() {
   }, [property]);
 
   const handleFavorites = () => {
-    console.log("enter-d-d-d-d-readl-estate");
     let favorites =
       JSON.parse(localStorage.getItem(`${user.id}_favorites`)) || [];
 

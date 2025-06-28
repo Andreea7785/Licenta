@@ -37,7 +37,6 @@ export const ChatProvider = ({ children }) => {
       client.subscribe("/user/queue/messages", (msg) => {
         const message = JSON.parse(msg.body);
         const fromId = message.senderId;
-        console.log(fromId != user.id && fromId != activeChat);
 
         setMessages((prev) => ({
           ...prev,
@@ -69,8 +68,7 @@ export const ChatProvider = ({ children }) => {
             ];
           }
         });
-        console.log(fromId);
-        console.log(activeChat);
+
         setUnreadCounts((prev) => ({
           ...prev,
           [fromId]:

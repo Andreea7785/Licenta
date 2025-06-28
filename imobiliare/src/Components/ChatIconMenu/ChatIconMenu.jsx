@@ -15,12 +15,10 @@ import "./ChatIconMenu.css";
 const ChatIconMenu = () => {
   const { conversations, unreadCounts, openChatWith, user } = useChat();
   const [anchorEl, setAnchorEl] = useState(null);
-  console.log(unreadCounts);
   const totalUnread = Object.values(unreadCounts).reduce(
     (sum, c) => sum + c,
     0
   );
-  console.log(unreadCounts);
 
   const handleOpen = (event) => setAnchorEl(event.currentTarget);
   const handleClose = () => setAnchorEl(null);
