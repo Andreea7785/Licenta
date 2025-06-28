@@ -140,7 +140,7 @@ const GuideMain = () => {
           </a>
         </h3>
         <ul>
-          <li>🏆 Top 3 agenți după venituri</li>
+          <li>🏆Top 3 agenți pe baza vânzărilor</li>
           <li>🎯 Îndeplinirea targetului la nivel de firmă</li>
           <li>📊 Distribuția valorii vânzărilor pe tipuri de proprietăți</li>
         </ul>

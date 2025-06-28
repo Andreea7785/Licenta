@@ -12,24 +12,23 @@ import PersonIcon from "@mui/icons-material/Person";
 import { useChat } from "../../context/ChatContext";
 
 const ChatIconMenu = () => {
-  const { conversations, unreadCounts, openChatWith } = useChat();
+  const { conversations, unreadCounts, openChatWith, user } = useChat();
   const [anchorEl, setAnchorEl] = useState(null);
-
+  console.log(unreadCounts);
   const totalUnread = Object.values(unreadCounts).reduce(
     (sum, c) => sum + c,
     0
   );
+  console.log(unreadCounts);
 
   const handleOpen = (event) => setAnchorEl(event.currentTarget);
   const handleClose = () => setAnchorEl(null);
 
   const handleSelectChat = (userId) => {
-    const propertyId = conversations[0].propertyId;
-
-    openChatWith(userId, propertyId);
+    openChatWith(userId);
     handleClose();
   };
-  console.log(conversations);
+
   return (
     <>
       <IconButton color="inherit" onClick={handleOpen}>
@@ -42,24 +41,28 @@ const ChatIconMenu = () => {
         {conversations.length === 0 && (
           <MenuItem disabled>Nu există conversații</MenuItem>
         )}
-        {conversations.map((conv) => (
-          <MenuItem key={conv.id} onClick={() => handleSelectChat(conv.id)}>
-            <ListItemIcon>
-              <PersonIcon />
-            </ListItemIcon>
-            <ListItemText
-              primary={`User ${conv.id}`}
-              secondary={conv.lastMessage?.slice(0, 40)}
-            />
-            {unreadCounts[conv.id] > 0 && (
-              <Badge
-                badgeContent={unreadCounts[conv.id]}
-                color="error"
-                sx={{ ml: 1 }}
+        {conversations.map((conv) =>
+          conv.id != user.id ? (
+            <MenuItem key={conv.id} onClick={() => handleSelectChat(conv.id)}>
+              <ListItemIcon>
+                <PersonIcon />
+              </ListItemIcon>
+              <ListItemText
+                primary={`User ${conv.id}`}
+                secondary={conv.lastMessage?.slice(0, 40)}
               />
-            )}
-          </MenuItem>
-        ))}
+              {unreadCounts[conv.id] > 0 && (
+                <Badge
+                  badgeContent={unreadCounts[conv.id]}
+                  color="error"
+                  sx={{ ml: 1 }}
+                />
+              )}
+            </MenuItem>
+          ) : (
+            <MenuItem></MenuItem>
+          )
+        )}
       </Menu>
     </>
   );

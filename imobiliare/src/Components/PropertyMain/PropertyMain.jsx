@@ -72,12 +72,12 @@ export default function PropertyMain() {
     slidesToScroll: 1,
     arrows: true,
   };
-  console.log(property.property_id);
+
   const createAppointment = async () => {
     const formData = new FormData();
     formData.append("client_id", user.id);
     formData.append("observations", appointmentData.observations);
-    formData.append("date", dayjs(appointmentData.date).toISOString());
+    formData.append("date", dayjs(appointmentData.date).toISOString()) + ":00";
     formData.append("property_id", property.property_id);
 
     user.id;

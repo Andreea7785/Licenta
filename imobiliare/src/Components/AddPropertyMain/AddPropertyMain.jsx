@@ -54,6 +54,20 @@ export default function AddPropertyMain() {
   useEffect(() => {
     setFormValid(isFormComplete(formData));
   }, [formData]);
+  const uploadImageToServer = async (image) => {
+    const formData = new FormData();
+    formData.append("file", image);
+    const response = await fetch("http://localhost:8080/api/upload", {
+      method: "POST",
+      body: formData,
+    });
+
+    if (!response.ok) {
+      throw new Error("Eroare la încărcarea imaginii");
+    }
+
+    return await response.text(); // returnează doar numele fișierului
+  };
 
   const handleFacilityChange = (index, field, value) => {
     const updatedFacilities = [...formData.facilities];
@@ -100,23 +114,26 @@ export default function AddPropertyMain() {
     const agentEmail =
       localStorage.getItem("agent_email") || formData.agent_asigned;
 
-    const propertyToSend = {
-      ...formData,
-      agent_asigned: agentEmail,
-      facilities: formData.facilities.map(
-        (f) => `${f.name}:${f.distance}${f.unit}`
-      ),
-      images: formData.images.map((img) => img.name),
-    };
-
     try {
+      // 🔄 Upload individual pentru fiecare imagine
+      const uploadedImageNames = await Promise.all(
+        formData.images.map((img) => uploadImageToServer(img))
+      );
+
+      const propertyToSend = {
+        ...formData,
+        agent_asigned: agentEmail,
+        facilities: formData.facilities.map(
+          (f) => `${f.name}:${f.distance}${f.unit}`
+        ),
+        images: uploadedImageNames,
+      };
+
       const response = await fetch("http://localhost:8080/api/properties", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(propertyToSend),
       });
-
-      "Răspuns backend:", response;
 
       if (response.ok) {
         setSubmitMessage("Proprietate încărcată cu succes!");
@@ -144,8 +161,8 @@ export default function AddPropertyMain() {
         setSubmitMessage(`Eroare la salvare în backend: ${errorText}`);
       }
     } catch (err) {
-      console.error("Eroare rețea:", err);
-      setSubmitMessage("Eroare de rețea.");
+      console.error("Eroare la upload sau salvare:", err);
+      setSubmitMessage("Eroare la încărcarea imaginilor.");
     }
   };
 

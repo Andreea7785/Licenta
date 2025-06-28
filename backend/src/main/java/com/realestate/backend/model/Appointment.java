@@ -26,7 +26,7 @@ public class Appointment {
     private User agent;
 
     @Column(name = "date")
-    private LocalDate date;
+    private LocalDateTime date;
 
     @Column(name = "status", length = 15)
     private String status;
@@ -71,11 +71,11 @@ public class Appointment {
         this.property = property;
     }
 
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 

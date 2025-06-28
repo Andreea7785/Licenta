@@ -65,10 +65,6 @@ public class ChatController {
         entity.setReceiver(receiverOpt.get());
         entity.setContent(message.getContent());
 
-        if (message.getPropertyId() != null) {
-            Property property = propertyRepository.findById(message.getPropertyId()).orElse(null);
-            entity.setProperty(property);
-        }
         messageRepository.save(entity);
 
         return message;

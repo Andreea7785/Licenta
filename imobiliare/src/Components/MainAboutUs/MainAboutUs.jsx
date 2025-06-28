@@ -1,44 +1,59 @@
 import React from "react";
 import "./MainAboutUs.css";
 
-export default function MainAboutUs() {
+const MainAboutUs = () => {
   return (
-    <div className="AboutUs">
-      <div className="title">
-        <h1>Despre HomeDeal</h1>
-      </div>
-      <div className="content">
+    <div className="about-us-container">
+      <h1>Despre HomeDeal</h1>
+      <br />
+      <section>
         <p>
-          HomeDeal este o agenție imobiliară digitală care îți oferă o
-          experiență modernă și eficientă în tranzacționarea imobilelor. Ne
-          adresăm atât cumpărătorilor, cât și vânzătorilor, punând la dispoziție
-          un proces simplu, sigur și 100% online.
+          HomeDeal este platforma digitală oficială a agenției imobiliare cu
+          același nume, concepută pentru a moderniza procesul de interacțiune
+          dintre agenți și clienți. Aplicația permite gestionarea completă a
+          anunțurilor, programărilor și comunicării, exclusiv pe bază de
+          autentificare.
         </p>
+      </section>
 
+      <section>
         <h2>Misiunea noastră</h2>
         <p>
-          Să facilităm tranzacțiile imobiliare printr-o platformă transparentă,
-          intuitivă și accesibilă, în care fiecare utilizator are controlul
-          asupra procesului de la programarea unei vizionări, până la încărcarea
-          documentelor și contactul direct cu agentul.
+          Scopul platformei HomeDeal este de a simplifica și digitaliza întregul
+          proces imobiliar, oferind un spațiu de lucru sigur și eficient
+          agenților interni și o experiență clară și controlată clienților care
+          își creează cont în sistem.
         </p>
+      </section>
 
+      <section>
         <h2>Ce oferim</h2>
-        <p>
-          Platforma HomeDeal permite utilizatorilor să exploreze anunțuri
-          imobiliare actualizate, să programeze vizionări direct din anunț, să
-          încarce documente personale în siguranță și să discute cu agentul
-          responsabil prin intermediul unui chat AI integrat.
-        </p>
+        <ul>
+          <li>
+            Acces securizat pentru agenții HomeDeal și clienți autentificați
+          </li>
+          <li>Creare, editare și administrare de anunțuri imobiliare</li>
+          <li>Programarea vizionărilor direct prin platformă</li>
+          <li>Comunicare în timp real prin sistemul de mesagerie</li>
+          <li>
+            Rapoarte personalizate pentru agenți și analiză la nivel de firmă
+          </li>
+        </ul>
+      </section>
 
+      <section>
         <h2>Valorile noastre</h2>
-        <p>
-          Credem în transparență, profesionalism, siguranță digitală și
-          adaptabilitate la nevoile clienților. Fiecare proprietate listată este
-          atent verificată, iar fiecare client beneficiază de asistență
-          personalizată din partea agenților noștri.
-        </p>
-      </div>
+        <ul>
+          <li>
+            🔒 Securitate în gestionarea datelor și autentificare controlată
+          </li>
+          <li>📊 Transparență în procesul de vânzare și analiză</li>
+          <li>🤝 Profesionalism în interacțiunea agent–client</li>
+          <li>🧭 Inovație digitală adaptată pieței imobiliare actuale</li>
+        </ul>
+      </section>
     </div>
   );
-}
+};
+
+export default MainAboutUs;

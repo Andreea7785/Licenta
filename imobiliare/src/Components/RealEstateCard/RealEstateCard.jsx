@@ -151,8 +151,20 @@ const RealEstateCard = ({ card }) => {
         </Box>
       </CardContent>
       <CardActions disableSpacing>
-        <Button size="small" href={`/property/${card.code}`} component="a">
-          Vezi detalii
+        <Button
+          size="small"
+          href={`/property/${card.code}`}
+          component="a"
+          sx={{
+            fontWeight: 700,
+            color: "inherit",
+            textTransform: "none",
+            "&:hover": {
+              color: "#1D3557",
+            },
+          }}
+        >
+          VEZI DETALII{" "}
         </Button>
       </CardActions>
     </Card>

@@ -101,7 +101,7 @@ const CompanyTargetChart = ({ data, target }) => {
           >
             <XAxis dataKey="month" />
             <YAxis
-              domain={[0, 800000]}
+              domain={[0, 600000]}
               allowDataOverflow={false}
               tickFormatter={(val) => `${val.toLocaleString()} €`}
             />

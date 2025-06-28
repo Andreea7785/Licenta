@@ -5,6 +5,7 @@ import com.realestate.backend.model.PropertyRequestForm;
 import com.realestate.backend.model.User;
 import com.realestate.backend.repository.PropertyRequestFormRepository;
 import com.realestate.backend.repository.UserRepository;
+import com.realestate.backend.services.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,7 @@ public class PropertyRequestFormController {
     @Autowired
     private UserRepository userRepository;
 
+
     @PostMapping("/create")
     public ResponseEntity<?> createRequest(@RequestBody PropertyRequestFormDTO body) {
         try {
@@ -40,6 +42,7 @@ public class PropertyRequestFormController {
             request.setDescription(description);
 
             PropertyRequestForm saved = requestRepository.save(request);
+
 
             return ResponseEntity.status(HttpStatus.CREATED).body(saved);
         } catch (Exception e) {

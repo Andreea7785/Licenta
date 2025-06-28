@@ -43,3 +43,13 @@ a:hover {
 .icon-info {
   color: white;
 }
+
+.navigation .icon-info,
+.navigation .icon-aboutus,
+.navigation .icon-agent,
+.navigation .icon-realestate,
+.navigation .icon-form {
+  color: white;
+  font-size: 24px;
+  margin-right: 8px;
+}

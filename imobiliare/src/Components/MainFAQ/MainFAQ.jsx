@@ -1,51 +1,75 @@
-import React from "react";
+import React, { useState } from "react";
 import "./MainFAQ.css";
 
 export default function MainFAQ() {
+  const faqData = [
+    {
+      question: "📅 Cum pot programa o vizionare?",
+      answer:
+        "După autentificare, accesează pagina proprietății dorite și folosește butonul 'Programează vizionare'. Un agent te va contacta pentru confirmare.",
+    },
+    {
+      question: "🔐 Este necesar să am un cont pentru a contacta un agent?",
+      answer:
+        "Da, pentru a lua legătura cu agenții și a beneficia de funcționalitățile platformei este necesar să fii autentificat în contul tău.",
+    },
+    {
+      question: "❤️ Cum pot salva o proprietate ca preferată?",
+      answer:
+        "Pe pagina fiecărei proprietăți vei găsi o iconiță sub formă de inimă. Dă click pe aceasta pentru a adăuga în lista ta de favorite.",
+    },
+    {
+      question: "🔒 Datele mele personale sunt în siguranță?",
+      answer:
+        "Da. Respectăm toate reglementările GDPR, iar datele tale sunt procesate conform politicii de confidențialitate.",
+    },
+    {
+      question: "📞 Ce fac dacă nu primesc răspuns de la agent?",
+      answer:
+        "Dacă agentul nu te contactează în 24 de ore, poți trimite un mesaj direct din contul tău sau poți contacta suportul tehnic.",
+    },
+    {
+      question: "🌙 Ce fac dacă am o întrebare în afara programului de lucru?",
+      answer:
+        "Poți accesa oricând iconița de chat AI din colțul paginii. Asistentul virtual este disponibil 24/7 pentru întrebări generale.",
+    },
+    {
+      question:
+        "📋 Ce fac dacă nu găsesc o proprietate care să îndeplinească cerințele mele?",
+      answer:
+        "Accesează secțiunea 'Spune-ne ce cauți', completează formularul, iar un agent te va contacta imediat ce apare o proprietate potrivită.",
+    },
+    {
+      question: "📆 Pot viziona o proprietate și în weekend?",
+      answer:
+        "Da, în funcție de disponibilitatea agentului. Majoritatea agenților oferă vizionări și în weekend, pe bază de programare.",
+    },
+  ];
+
+  const [activeIndex, setActiveIndex] = useState(null);
+
+  const toggleFAQ = (index) => {
+    setActiveIndex(index === activeIndex ? null : index);
+  };
+
   return (
-    <div className="FAQ">
-      <div className="title">
-        <h1>Întrebări Frecvente </h1>
-      </div>
-
-      <div className="content">
-        <h2>Ce este politica de confidențialitate?</h2>
-        <p>
-          Politica de confidențialitate descrie modul în care colectăm, utilizăm
-          și protejăm datele dumneavoastră personale atunci când utilizați
-          site-ul nostru.
-        </p>
-        <h2>Cum pot contacta agenții imobiliari?</h2>
-        <p>
-          Puteți contacta agenții imobiliari prin formularul de contact de pe
-          site-ul nostru sau direct prin intermediul anunțurilor postate pe
-          platformă.
-        </p>
-        <h2>Ce este termenul de intermediere imobiliară?</h2>
-        <p>
-          Intermedierea imobiliară se referă la procesul prin care agenția ajută
-          clienții să cumpere, să vândă sau să închirieze proprietăți,
-          interacționând între vânzători și cumpărători.
-        </p>
-        <h2>Cum pot adăuga un anunț pe site?</h2>
-        <p>
-          Pentru a adăuga un anunț, trebuie să aveți un cont de agent imobiliar
-          pe site. După autentificare, veți avea opțiunea de a adăuga un anunț
-          în secțiunea dedicată.
-        </p>
-        <h2>Cum pot programa o vizionare pentru o proprietate?</h2>
-        <p>
-          Vizionările pot fi programate direct de pe pagina proprietății,
-          folosind butonul „Programează o vizionare”. După completarea
-          formularului, vei fi contactat de un agent pentru confirmare.{" "}
-        </p>
-
-        <h2>Sunt proprietățile verificate înainte de publicare?</h2>
-        <p>
-          Da, toate anunțurile sunt verificate de echipa noastră înainte de
-          publicare, pentru a asigura corectitudinea informațiilor și
-          conformitatea cu legislația în vigoare.
-        </p>
+    <div className="faq-container">
+      <h2 className="faqClient-title">
+        <strong>Întrebări frecvente</strong>
+      </h2>
+      <div className="faq-list">
+        {faqData.map((item, index) => (
+          <div
+            key={index}
+            className={`faq-item ${activeIndex === index ? "active" : ""}`}
+            onClick={() => toggleFAQ(index)}
+          >
+            <div className="faq-question">{item.question}</div>
+            {activeIndex === index && (
+              <div className="faq-answer">{item.answer}</div>
+            )}
+          </div>
+        ))}
       </div>
     </div>
   );

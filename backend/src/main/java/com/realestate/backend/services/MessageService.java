@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 @Service
 public class MessageService {
@@ -19,63 +21,62 @@ public class MessageService {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private PropertyRepository propertyRepository;
 
     public List<ConversationDTO> getConversationsForUser(Long userId) {
+        // Preia toate mesajele în care utilizatorul este sender sau receiver
         List<Message> messages = messageRepository.findMessagesForUser(userId);
 
-        Map<String, Message> latestMessages = new LinkedHashMap<>();
+        // Hărți auxiliare
+        Map<Long, Message> latestMsgMap = new HashMap<>();
+        Map<Long, Integer> unreadMap = new HashMap<>();
 
-        for (Message msg : messages) {
-            Integer senderId = msg.getSender().getUserId();
-            Integer receiverId = msg.getReceiver().getUserId();
-            Integer minId = Math.min(senderId, receiverId);
-            Integer maxId = Math.max(senderId, receiverId);
-            Long propertyId = msg.getProperty() != null ? msg.getProperty().getProperty_id() : null;
+        for (Message m : messages) {
+            Long sender = m.getSender().getUserId().longValue();
+            Long receiver = m.getReceiver().getUserId().longValue();
 
-            String key = minId + "_" + maxId + "_" + (propertyId != null ? propertyId : "null");
+            // Identificăm celălalt user din conversație
+            Long otherId = sender.equals(userId) ? receiver : sender;
 
-            // Dacă nu există încă o conversație cu cheia respectivă, o adăugăm
-            latestMessages.putIfAbsent(key, msg);
+            // Ignorăm conversațiile cu noi înșine
+            if (otherId.equals(userId)) {
+                continue;
+            }
+
+            // Actualizăm ultimul mesaj
+            Message prev = latestMsgMap.get(otherId);
+            if (prev == null || m.getTimestamp().after(prev.getTimestamp())) {
+                latestMsgMap.put(otherId, m);
+            }
+
+            // Contorizăm mesajele necitite primite de la otherId
+            if (sender.equals(otherId) && receiver.equals(userId)) {
+                unreadMap.put(otherId, unreadMap.getOrDefault(otherId, 0) + 1);
+            }
         }
 
-        List<ConversationDTO> result = new ArrayList<>();
+        // Construim lista DTO pentru frontend
+        return latestMsgMap.entrySet().stream()
+                .map(entry -> {
+                    Long otherId = entry.getKey();
+                    Message lastMsg = entry.getValue();
 
-        for (Message msg : latestMessages.values()) {
-            Integer otherId = msg.getSender().getUserId().equals(userId)
-                    ? msg.getSender().getUserId()
-                    : msg.getReceiver().getUserId();
+                    // Determinăm numele celuilalt user
+                    String otherName = lastMsg.getSender().getUserId().equals(otherId)
+                            ? lastMsg.getSender().getFullName()
+                            : lastMsg.getReceiver().getFullName();
 
-            String otherName = msg.getSender().getUserId().equals(userId)
-                    ? msg.getSender().getFullName()
-                    : msg.getReceiver().getFullName();
+                    int unread = unreadMap.getOrDefault(otherId, 0);
 
-            Long propertyId = msg.getProperty() != null ? msg.getProperty().getProperty_id() : null;
-            String propertyTitle = msg.getProperty() != null ? msg.getProperty().getTitle() : "";
-
-            // Construiește un ID unic (string) pentru conversație
-            String conversationKey = generateConversationKey(
-                    Math.min(userId, otherId),
-                    Math.max(userId, otherId),
-                    propertyId
-            );
-
-            result.add(new ConversationDTO(
-                    conversationKey,
-                    otherId,
-                    otherName,
-                    propertyId,
-                    propertyTitle,
-                    msg.getContent()
-            ));
-        }
-
-        return result;
+                    return new ConversationDTO(otherId, otherName, lastMsg.getContent(), unread);
+                })
+                // Optional: sortează după timestamp al ultimului mesaj (descendent)
+                .sorted((d1, d2) -> d2.getLastMessage().compareTo(d1.getLastMessage()))
+                .collect(Collectors.toList());
     }
 
-    private String generateConversationKey(Long id1, Long id2, Long propertyId) {
-        return id1 + "_" + id2 + "_" + (propertyId != null ? propertyId : "null");
+
+    private String generateConversationKey(Long id1, Long id2) {
+        return id1 + "_" + id2;
     }
 
 

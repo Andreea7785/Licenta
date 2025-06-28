@@ -7,6 +7,7 @@ import com.realestate.backend.model.User;
 import com.realestate.backend.repository.AppointmentRepository;
 import com.realestate.backend.repository.PropertyRepository;
 import com.realestate.backend.repository.UserRepository;
+import com.realestate.backend.services.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -29,6 +30,10 @@ public class AppointmentController {
     private final UserRepository userRepository;
     private final PropertyRepository propertyRepository;
     private final AppointmentRepository appointmentRepository;
+
+    @Autowired
+    private EmailService emailService;
+
 
     @Autowired
     public AppointmentController(AppointmentRepository appointmentRepository,
@@ -72,6 +77,7 @@ public class AppointmentController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
         }
 
+
         Appointment appointment = new Appointment();
         appointment.setClient(client);
         appointment.setProperty(property);
@@ -79,7 +85,7 @@ public class AppointmentController {
 
         // parsează data din string
         try {
-            LocalDate parsedDate = LocalDate.parse(request.getDate()); // FĂRĂ .toString()
+            LocalDateTime parsedDate = LocalDateTime.parse(request.getDate());
             appointment.setDate(parsedDate);
         } catch (DateTimeParseException e) {
             response.put("error", true);
@@ -102,6 +108,9 @@ public class AppointmentController {
         responseDto.setStatus(saved.getStatus());
 
         response.put("appointment", responseDto);
+
+        User agent = property.getAgent();
+        emailService.sendSimpleEmail(agent.getEmail(), "Test subj", "Merge tot bine programare");
 
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }

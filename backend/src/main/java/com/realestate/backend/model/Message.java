@@ -19,10 +19,6 @@ public class Message {
     @JoinColumn(name = "receiver_id")
     private User receiver;
 
-    @ManyToOne
-    @JoinColumn(name = "property_id")
-    private Property property;
-
     @Column(columnDefinition = "TEXT")
     private String content;
 
@@ -69,11 +65,4 @@ public class Message {
         this.timestamp = timestamp;
     }
 
-    public Property getProperty() {
-        return property;
-    }
-
-    public void setProperty(Property property) {
-        this.property = property;
-    }
 }

@@ -1,46 +1,52 @@
 package com.realestate.backend.DTO;
 
 public class ConversationDTO {
-
-    private String conversationKey;
-    private Integer id;
+    private Long id;
     private String name;
-    private String propertyTitle;
     private String lastMessage;
+    private int unreadCount;
 
-    private Long propertyId;
+    public ConversationDTO() {
+    }
 
-    public ConversationDTO(String conversationKey, Integer id, String name, Long propertyId, String propertyTitle, String lastMessage) {
-        this.conversationKey = conversationKey;
+    public ConversationDTO(Long id, String name, String lastMessage, int unreadCount) {
         this.id = id;
         this.name = name;
-        this.propertyId = propertyId;
-        this.propertyTitle = propertyTitle;
         this.lastMessage = lastMessage;
+        this.unreadCount = unreadCount;
     }
 
-    public Integer getId() {
+    // Getteri
+    public Long getId() {
         return id;
-    }
-
-    public String getConversationKey() {
-        return conversationKey;
-    }
-
-
-    public Long getPropertyId() {
-        return propertyId;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getPropertyTitle() {
-        return propertyTitle;
-    }
-
     public String getLastMessage() {
         return lastMessage;
+    }
+
+    public int getUnreadCount() {
+        return unreadCount;
+    }
+
+    // Setteri
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setLastMessage(String lastMessage) {
+        this.lastMessage = lastMessage;
+    }
+
+    public void setUnreadCount(int unreadCount) {
+        this.unreadCount = unreadCount;
     }
 }

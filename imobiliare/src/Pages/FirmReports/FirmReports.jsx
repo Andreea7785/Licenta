@@ -11,7 +11,7 @@ import PropertyTypePieChart from "../../Components/PropertyTypePieChart/Property
 // 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
 const FirmReports = () => {
   const [data, setData] = useState(null);
-  const target = 500000;
+  const target = 250000;
 
   useEffect(() => {
     axios

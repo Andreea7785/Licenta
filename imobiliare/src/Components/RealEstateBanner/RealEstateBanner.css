@@ -20,7 +20,7 @@
 }
 
 .banner-about {
-  background-color: #f5ebdb;
+  background-color: #f1fafb;
   padding: 1.5rem;
   text-align: center;
   margin-bottom: 2rem;
@@ -47,17 +47,21 @@
 }
 
 .stat-beige {
-  background-color: #d5bba9;
+  background-color: #1d3557;
+  font-weight: bold;
+  color: white;
 }
 
 .stat-brown {
-  background-color: #b57764;
+  background-color: #457b9d;
   color: white;
+  font-weight: bold;
 }
 
 .stat-purple {
-  background-color: #83777e;
+  background-color: #2f5d62;
   color: white;
+  font-weight: bold;
 }
 
 .banner-body {

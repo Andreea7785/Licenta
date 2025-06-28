@@ -15,10 +15,8 @@ export const ChatProvider = ({ children }) => {
   const [stompClient, setStompClient] = useState(null);
   const [conversations, setConversations] = useState([]);
   const [activeChat, setActiveChat] = useState(null);
-  const [propertyId, setPropertyId] = useState(null);
+  const [unreadCounts, setUnreadCounts] = useState(0);
   const [messages, setMessages] = useState({});
-  const [unreadCounts, setUnreadCounts] = useState({});
-  console.log(messages);
   const clientRef = useRef(null);
   const user = JSON.parse(localStorage.getItem("user"));
 
@@ -28,7 +26,7 @@ export const ChatProvider = ({ children }) => {
     fetch(`http://localhost:8080/api/conversations?userId=${user.id}`)
       .then((res) => res.json())
       .then((data) => setConversations(data))
-      .catch((err) => console.error("Eroare conversații", err));
+      .catch((err) => console.error("Eroare la conversații", err));
 
     const socket = new SockJS("http://localhost:8080/chat-websocket");
     const client = over(socket);
@@ -37,6 +35,7 @@ export const ChatProvider = ({ children }) => {
       client.subscribe("/user/queue/messages", (msg) => {
         const message = JSON.parse(msg.body);
         const fromId = message.senderId;
+        console.log(fromId != user.id && fromId != activeChat);
 
         setMessages((prev) => ({
           ...prev,
@@ -44,10 +43,17 @@ export const ChatProvider = ({ children }) => {
         }));
 
         setConversations((prev) => {
-          const exists = prev.find((c) => c.id === fromId);
+          const exists = prev.find((c) => c.id == fromId);
           if (exists) {
             return prev.map((c) =>
-              c.id === fromId ? { ...c, lastMessage: message.content } : c
+              c.id == fromId
+                ? {
+                    ...c,
+                    lastMessage: message.content,
+                    unreadCount:
+                      fromId === activeChat ? 0 : (c.unreadCount || 0) + 1,
+                  }
+                : c
             );
           } else {
             return [
@@ -56,73 +62,83 @@ export const ChatProvider = ({ children }) => {
                 id: fromId,
                 name: `User ${fromId}`,
                 lastMessage: message.content,
+                unreadCount: 1,
               },
             ];
           }
         });
-
-        if (fromId !== activeChat) {
-          setUnreadCounts((prev) => ({
-            ...prev,
-            [fromId]: (prev[fromId] || 0) + 1,
-          }));
-        }
+        console.log(fromId);
+        console.log(activeChat);
+        setUnreadCounts((prev) => ({
+          ...prev,
+          [fromId]:
+            fromId == activeChat || fromId == user.id
+              ? 0
+              : (prev[fromId] || 0) + 1,
+        }));
       });
     });
+
     setStompClient(client);
     clientRef.current = client;
   }, [user, activeChat]);
 
   const sendMessage = (receiverId, content) => {
-    console.log(propertyId);
-    const msg = {
-      senderId: user.id,
-      receiverId,
-      content,
-      propertyId: propertyId,
-    };
+    const msg = { senderId: user.id, receiverId, content };
     stompClient.send(
       `/app/chat.private.${receiverId}`,
       {},
       JSON.stringify(msg)
     );
+
     setMessages((prev) => ({
       ...prev,
       [receiverId]: [...(prev[receiverId] || []), msg],
     }));
 
     setConversations((prev) => {
-      const exists = prev.find((c) => c.id === receiverId);
+      const exists = prev.find((c) => c.id == receiverId);
       if (exists) {
         return prev.map((c) =>
-          c.id === receiverId ? { ...c, lastMessage: content } : c
+          c.id == receiverId
+            ? {
+                ...c,
+                lastMessage: content,
+              }
+            : c
         );
       } else {
         return [
           ...prev,
-          { id: receiverId, name: `User ${receiverId}`, lastMessage: content },
+          {
+            id: receiverId,
+            name: `User ${receiverId}`,
+            lastMessage: content,
+            unreadCount: 0,
+          },
         ];
       }
     });
   };
 
-  const openChatWith = async (userId, propertyId) => {
-    console.log(propertyId);
-    setActiveChat(userId);
-    setPropertyId(propertyId);
-    setUnreadCounts((prev) => ({ ...prev, [userId]: 0 }));
+  const openChatWith = async (otherId) => {
+    setActiveChat(otherId);
+    setUnreadCounts((prev) => ({ ...prev, [otherId]: 0 }));
+    setConversations((prev) =>
+      prev.map((c) => (c.id == otherId ? { ...c, unreadCount: 0 } : c))
+    );
 
-    if (!messages[userId]) {
+    if (!messages[otherId]) {
       try {
         const res = await fetch(
-          `http://localhost:8080/api/messages?user1=${user.id}&user2=${userId}`
+          `http://localhost:8080/api/messages?user1=${user.id}&user2=${otherId}`
         );
         if (res.ok) {
           const data = await res.json();
-          setMessages((prev) => ({ ...prev, [userId]: data }));
+          setMessages((prev) => ({ ...prev, [otherId]: data }));
         }
       } catch (err) {
-        console.error("Failed to fetch messages", err);
+        console.error("Eroare fetch mesaje", err);
       }
     }
   };
@@ -133,10 +149,10 @@ export const ChatProvider = ({ children }) => {
         conversations,
         activeChat,
         messages,
-        unreadCounts,
         sendMessage,
         openChatWith,
-        setActiveChat,
+        unreadCounts,
+        setUnreadCounts,
         user,
       }}
     >

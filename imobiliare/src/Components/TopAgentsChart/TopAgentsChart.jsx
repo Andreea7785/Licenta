@@ -89,7 +89,7 @@ const TopAgentsChart = ({ data }) => {
   return (
     <>
       <div className="top-agents-chart" ref={chartRef}>
-        <h2 className="top-agents-title">🏆 Top 3 agenți după venituri</h2>
+        <h2 className="top-agents-title">🏆 Top 3 agenți pe baza vânzărilor</h2>
 
         <ResponsiveContainer width="100%" height={300}>
           <BarChart data={data}>

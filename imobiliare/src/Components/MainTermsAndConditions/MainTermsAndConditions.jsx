@@ -1,83 +1,85 @@
 import React from "react";
 import "./MainTermsAndConditions.css";
 
-export default function MainTermsAndConditions() {
+const MainTermsAndConditions = () => {
   return (
-    <div className="Terms">
-      <div className="title">
-        <h1>Termeni și condiții</h1>
-      </div>
-      <div className="content">
+    <div className="terms-container">
+      <h1>Termeni și condiții</h1>
+      <br />
+
+      <section>
         <p>
-          HomeDeal oferă o platformă de publicare a anunțurilor imobiliare,
-          exclusiv prin intermediul agenților imobiliari autorizați. Serviciile
-          constau în promovarea proprietăților pentru vânzare sau închiriere.
+          <span className="icon">🏠</span>
+          Platforma HomeDeal este un serviciu digital dezvoltat și operat
+          exclusiv de agenția imobiliară cu același nume. Serviciile oferite
+          prin această platformă vizează promovarea și gestionarea anunțurilor
+          imobiliare prin intermediul agenților autorizați ai companiei.
+          Clienții pot accesa platforma, însă doar prin crearea unui cont pot
+          beneficia de funcționalități precum programarea vizionărilor,
+          comunicare cu agentul sau consultarea istoricului tranzacțiilor.
         </p>
 
-        <h2>Utilizarea site-ului</h2>
         <p>
-          Site-ul nostru este destinat exclusiv informării clienților cu privire
-          la ofertele disponibile prin agenția noastră. Nu este permisă
-          utilizarea site-ului în scopuri comerciale fără acordul nostru
-          prealabil. Publicarea anunțurilor se face exclusiv de către agenția
-          noastră, utilizatorii nu pot încărca conținut sau crea conturi
-          proprii.
+          <span className="icon">👤</span>
+          Utilizarea platformei este permisă doar în scopuri personale și
+          informative. Publicarea de conținut (anunțuri, descrieri, imagini)
+          este rezervată agenției HomeDeal și personalului său autorizat. Este
+          interzisă utilizarea site-ului în scopuri comerciale fără acordul
+          explicit al companiei.
         </p>
 
-        <h2>Proprietatea informațiilor</h2>
         <p>
-          Toate informațiile prezentate pe acest site, inclusiv descrierile
-          proprietăților, fotografiile, videoclipurile și materialele grafice,
-          sunt proprietatea agenției noastre sau a partenerilor noștri.
-          Copierea, reproducerea sau distribuirea acestor materiale fără acordul
-          nostru scris este interzisă și poate atrage răspunderea civilă sau
-          penală.
+          <span className="icon">©️</span>
+          Toate materialele afișate pe platformă sunt protejate de drepturi de
+          autor și sunt proprietatea HomeDeal sau a partenerilor săi.
+          Reproducerea, copierea sau redistribuirea acestor materiale fără
+          consimțământ scris prealabil este interzisă și poate atrage
+          răspunderea civilă sau penală.
         </p>
 
-        <h2>Responsabilitatea informațiilor</h2>
         <p>
-          Ne străduim să oferim informații corecte și actualizate despre
-          proprietățile prezentate, însă nu garantăm că toate datele sunt
-          complet exacte în orice moment. Disponibilitatea proprietăților,
-          prețurile și alte detalii pot suferi modificări fără notificare
-          prealabilă. Recomandăm confirmarea detaliilor prin contact direct cu
-          agenții noștri înainte de a lua decizii de achiziție sau închiriere.
+          <span className="icon">ℹ️</span>
+          Deși ne străduim să menținem informațiile afișate corecte și
+          actualizate, nu putem garanta exactitatea acestora în orice moment.
+          Detalii precum prețul, disponibilitatea unei proprietăți sau
+          specificațiile tehnice pot fi modificate fără notificare prealabilă.
+          Recomandăm consultarea directă cu agenții înainte de luarea unei
+          decizii de achiziție.
         </p>
 
-        <h2>Limitarea răspunderii</h2>
         <p>
-          Agenția noastră nu poate fi trasă la răspundere pentru eventuale
-          pierderi sau daune suferite de utilizatori ca urmare a utilizării
-          informațiilor prezentate pe site. Utilizarea site-ului se face pe
-          propria răspundere, iar deciziile privind tranzacțiile imobiliare
-          trebuie luate în baza unor analize și consilieri adecvate.
+          <span className="icon">⚠️</span>
+          Utilizarea informațiilor din platformă se face pe propria răspundere.
+          HomeDeal nu poate fi considerată responsabilă pentru pierderi sau
+          daune rezultate din utilizarea site-ului sau luarea deciziilor pe baza
+          datelor afișate. Orice tranzacție imobiliară ar trebui precedată de o
+          analiză personală și, dacă este cazul, consiliere juridică sau
+          financiară.
         </p>
 
-        <h2>Protecția datelor</h2>
         <p>
-          Datele personale colectate de la utilizatori (de exemplu, prin
-          formulare de contact) sunt prelucrate în conformitate cu legislația în
-          vigoare și <strong>politica noastră de confidențialitate </strong>,
-          disponibilă <a href="/politica-de-confidentialitate">aici</a>. Ne
-          angajăm să protejăm datele utilizatorilor și să le folosim exclusiv în
-          scopul furnizării serviciilor solicitate.
+          <span className="icon">🔒</span>
+          Datele personale colectate în cadrul platformei sunt prelucrate
+          conform legislației în vigoare. Ne angajăm să protejăm
+          confidențialitatea utilizatorilor.
         </p>
 
-        <h2>Modificări ale termenilor și condițiilor</h2>
         <p>
-          Ne rezervăm dreptul de a modifica acești termeni și condiții oricând
-          este necesar. Modificările vor fi publicate pe site și vor intra în
-          vigoare imediat după publicare. Vă recomandăm să verificați periodic
-          această secțiune pentru a fi la curent cu eventualele actualizări.
+          <span className="icon">✏️</span>
+          Ne rezervăm dreptul de a modifica prezentul document oricând este
+          necesar. Orice actualizare va fi publicată pe site și va intra în
+          vigoare imediat după afișare. Vă recomandăm să verificați periodic
+          această pagină.
         </p>
 
-        <h2>Contact</h2>
         <p>
-          Pentru întrebări sau informații suplimentare legate de utilizarea
-          site-ului, ne puteți contacta la adresa de e-mail:{" "}
-          <strong>homedeal@gmail.com</strong>.
+          <span className="icon">📧</span>
+          Pentru întrebări, sesizări sau solicitări privind utilizarea
+          platformei, ne puteți contacta la adresa: homedeal@gmail.com
         </p>
-      </div>
+      </section>
     </div>
   );
-}
+};
+
+export default MainTermsAndConditions;

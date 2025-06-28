@@ -2,12 +2,11 @@ import React from "react";
 import { Button } from "@mui/material";
 import { useChat } from "../../context/ChatContext";
 
-const StartUserChatButton = ({ agentId, propertyId }) => {
+const StartUserChatButton = ({ agentId }) => {
   const { openChatWith } = useChat();
-  console.log(agentId, propertyId);
 
   const handleClick = () => {
-    openChatWith(agentId, propertyId);
+    openChatWith(agentId);
   };
 
   return (

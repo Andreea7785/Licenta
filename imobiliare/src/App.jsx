@@ -40,7 +40,6 @@ function App() {
     <>
       <ChatProvider>
         <ChatBot />
-        {/* <ChatApp /> */}
         <ChatWindow />
         <BrowserRouter>
           <Routes>
