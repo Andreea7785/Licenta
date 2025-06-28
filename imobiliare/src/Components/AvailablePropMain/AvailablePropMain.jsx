@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import RealEstateFilter from "../../Components/RealEstateFilter/RealEstateFilter.jsx";
 import { RealEstateList } from "../../Components/RealEstateList/RealEstateList";
+import { formatPropertyObject } from "../../utils/utils.jsx";
 
 export const AvailablePropMain = () => {
   const [availableProperties, setAvailableProperties] = useState([]);
@@ -20,24 +21,7 @@ export const AvailablePropMain = () => {
     fetch("http://localhost:8080/api/properties")
       .then((res) => res.json())
       .then((data) => {
-        const formatted = data.map((p) => ({
-          id: p.property_id,
-          title: p.title,
-          location: `${p.area}, ${p.city}`,
-          price: `${p.price.toLocaleString()} EUR`,
-          surface: p.surface,
-          rooms: p.rooms,
-          bathrooms: p.bathrooms,
-          images: `/images/${p.image}`,
-          rating: 5,
-          tip: p.type,
-          zona: p.area,
-          oras: p.city,
-          agent: `${p.agent?.firstname || ""} ${
-            p.agent?.lastname || ""
-          }`.trim(),
-          code: p.property_id,
-        }));
+        const formatted = data.map((p) => formatPropertyObject(p));
         setAvailableProperties(formatted);
 
         const uniqueZones = [...new Set(data.map((p) => p.area))];

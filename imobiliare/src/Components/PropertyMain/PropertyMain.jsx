@@ -27,6 +27,7 @@ import DateTimeField from "../DateTimeField/DateTimeField";
 import dayjs from "dayjs";
 import { FiLogIn } from "react-icons/fi";
 import StartUserChatButton from "../StartUserChatButton/StartUserChatButton";
+import { formatPropertyObject } from "../../utils/utils";
 
 export default function PropertyMain() {
   const { id } = useParams();
@@ -61,7 +62,7 @@ export default function PropertyMain() {
       favorites = favorites.filter((item) => item.id !== property?.property_id);
       setFavorit(false);
     } else {
-      favorites.push({ ...property, id: property?.property_id });
+      favorites.push(formatPropertyObject(property));
       setFavorit(true);
     }
 

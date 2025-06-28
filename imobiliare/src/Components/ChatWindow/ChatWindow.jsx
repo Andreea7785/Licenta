@@ -1,12 +1,19 @@
 import React from "react";
-import { Box, Paper, Typography, IconButton } from "@mui/material";
+import { Box, Paper, Typography, IconButton, Avatar } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { useChat } from "../../context/ChatContext";
 import MessageList from "../MessageList/MessageList";
 import InputBar from "../InputBar/InputBar";
 
 const ChatWindow = () => {
-  const { activeChat, messages, sendMessage, setActiveChat, user } = useChat();
+  const {
+    activeChat,
+    messages,
+    sendMessage,
+    setActiveChat,
+    userDetails,
+    user,
+  } = useChat();
 
   if (!activeChat) return null;
 
@@ -16,6 +23,7 @@ const ChatWindow = () => {
     sendMessage(activeChat, text);
   };
   ("chat window");
+
   return (
     <Paper
       elevation={3}
@@ -45,7 +53,19 @@ const ChatWindow = () => {
         }}
         onClick={() => setActiveChat(null)}
       >
-        <Typography variant="subtitle1">Chat cu user {activeChat}</Typography>
+        <Typography
+          variant="subtitle1"
+          sx={{ display: "flex", alignItems: "center", gap: "5px" }}
+        >
+          <Avatar
+            src={
+              userDetails.role === "agent"
+                ? `/images/${userDetails.profilePicture}`
+                : `data:image/jpeg;base64,${userDetails?.profilePicture}`
+            }
+          />{" "}
+          {userDetails.firstname + " " + userDetails.lastname}
+        </Typography>
         <IconButton size="small" onClick={() => setActiveChat(null)}>
           <CloseIcon sx={{ color: "white" }} />
         </IconButton>

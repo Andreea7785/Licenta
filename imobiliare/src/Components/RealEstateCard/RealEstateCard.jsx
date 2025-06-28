@@ -31,14 +31,14 @@ const RealEstateCard = ({ card }) => {
     : null;
 
   useEffect(() => {
-    const favorites =
-      JSON.parse(localStorage.getItem(`${user.id}_favorites`)) || [];
+    const favorites = user
+      ? JSON.parse(localStorage.getItem(`${user.id}_favorites`))
+      : [];
     const exists = favorites.some((item) => item.id === card.id);
     setIsFavorite(exists);
   }, []);
 
   const toggleFavorite = () => {
-    console.log("enter-d-d-d-d-readl-estate");
     let favorites =
       JSON.parse(localStorage.getItem(`${user.id}_favorites`)) || [];
 

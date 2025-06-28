@@ -15,7 +15,9 @@ export const ChatProvider = ({ children }) => {
   const [stompClient, setStompClient] = useState(null);
   const [conversations, setConversations] = useState([]);
   const [activeChat, setActiveChat] = useState(null);
+  const [userDetails, setUserDetails] = useState({});
   const [unreadCounts, setUnreadCounts] = useState(0);
+
   const [messages, setMessages] = useState({});
   const clientRef = useRef(null);
   const user = JSON.parse(localStorage.getItem("user"));
@@ -97,33 +99,29 @@ export const ChatProvider = ({ children }) => {
     }));
 
     setConversations((prev) => {
-      const exists = prev.find((c) => c.id == receiverId);
-      if (exists) {
-        return prev.map((c) =>
-          c.id == receiverId
-            ? {
-                ...c,
-                lastMessage: content,
-              }
-            : c
-        );
-      } else {
-        return [
-          ...prev,
-          {
-            id: receiverId,
-            name: `User ${receiverId}`,
-            lastMessage: content,
-            unreadCount: 0,
-          },
-        ];
-      }
+      const updated = prev.filter((c) => c.id !== receiverId);
+
+      const newConversation = {
+        id: receiverId,
+        name: userDetails.firstname + " " + userDetails.lastname,
+        lastMessage: content,
+        unreadCount: 0,
+        profilePicture: userDetails.profilePicture,
+      };
+
+      return [newConversation, ...updated];
     });
   };
 
   const openChatWith = async (otherId) => {
     setActiveChat(otherId);
     setUnreadCounts((prev) => ({ ...prev, [otherId]: 0 }));
+
+    await fetch(`http://localhost:8080/api/users/${otherId}`)
+      .then((res) => res.json())
+      .then((data) => setUserDetails(data))
+      .catch((err) => console.error("Eroare la fetch:", err));
+
     setConversations((prev) =>
       prev.map((c) => (c.id == otherId ? { ...c, unreadCount: 0 } : c))
     );
@@ -152,6 +150,7 @@ export const ChatProvider = ({ children }) => {
         sendMessage,
         openChatWith,
         setActiveChat,
+        userDetails,
         unreadCounts,
         setUnreadCounts,
         user,

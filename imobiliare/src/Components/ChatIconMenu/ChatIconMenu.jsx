@@ -10,6 +10,7 @@ import {
 import MessageIcon from "@mui/icons-material/Message";
 import PersonIcon from "@mui/icons-material/Person";
 import { useChat } from "../../context/ChatContext";
+import "./ChatIconMenu.css";
 
 const ChatIconMenu = () => {
   const { conversations, unreadCounts, openChatWith, user } = useChat();
@@ -46,14 +47,35 @@ const ChatIconMenu = () => {
             <MenuItem
               key={conv.id}
               onClick={() => handleSelectChat(conv.id)}
-              sx={{ minWidth: "400px" }}
+              sx={{
+                minWidth: "300px",
+                gap: "8px",
+                borderRadius: "30px",
+                padding: "10px",
+              }}
             >
-              <ListItemIcon>
-                <PersonIcon />
+              <ListItemIcon className="list-item-icon">
+                {conv.profilePicture ? (
+                  <img
+                    src={`/images/${conv.profilePicture}`}
+                    alt={`${conv.name}`}
+                    className="chat-user-avatar"
+                  />
+                ) : (
+                  <PersonIcon
+                    className="chat-user-avatar"
+                    sx={{ fontSize: "35px" }}
+                  />
+                )}
               </ListItemIcon>
               <ListItemText
-                primary={`User ${conv.id}`}
-                secondary={conv.lastMessage?.slice(0, 40)}
+                primary={conv.name}
+                primaryTypographyProps={{ fontWeight: 600 }}
+                secondary={
+                  conv.lastMessage.length <= 20
+                    ? conv.lastMessage
+                    : conv.lastMessage?.slice(0, 20) + "..."
+                }
               />
               {unreadCounts[conv.id] > 0 && (
                 <Badge

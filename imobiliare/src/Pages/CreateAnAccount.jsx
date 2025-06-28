@@ -12,7 +12,7 @@ const RegisterPage = () => {
     phoneNumber: "",
     password: "",
     confirmPassword: "",
-    document: null,
+    profile_picture: null,
   });
 
   const handleChange = (e) => {

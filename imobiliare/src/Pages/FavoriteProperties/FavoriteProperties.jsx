@@ -10,6 +10,7 @@ export const FavoriteProperties = () => {
 
   const favoriteProperties =
     JSON.parse(localStorage.getItem(`${user.id}_favorites`)) || [];
+
   return (
     <div className="layout">
       <Sidebar />

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { RealEstateList } from "../RealEstateList/RealEstateList";
+import { formatPropertyObject } from "../../utils/utils";
 
 export default function LatestProperties() {
   const [properties, setProperties] = useState([]);
@@ -8,18 +9,7 @@ export default function LatestProperties() {
     fetch("http://localhost:8080/api/properties/latest")
       .then((res) => res.json())
       .then((data) => {
-        const formatted = data.map((p) => ({
-          id: p.property_id,
-          title: p.title,
-          location: `${p.area}, ${p.city}`,
-          price: `${p.price.toLocaleString()} EUR`,
-          surface: p.surface,
-          rooms: p.rooms,
-          bathrooms: p.bathrooms,
-          image: `/images/${p.image}`,
-          rating: 5,
-          code: p.property_id,
-        }));
+        const formatted = data.map((p) => formatPropertyObject(p));
         setProperties(formatted);
       })
       .catch((err) => console.error("Eroare la fetch:", err));

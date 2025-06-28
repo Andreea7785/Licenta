@@ -3,6 +3,7 @@ import { Grid } from "@mui/material";
 import RealEstateCard from "../RealEstateCard/RealEstateCard";
 
 export const RealEstateList = ({ properties }) => {
+  console.log(properties);
   return (
     <Grid
       container

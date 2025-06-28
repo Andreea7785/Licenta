@@ -2,6 +2,7 @@ package com.realestate.backend.services;
 
 import com.realestate.backend.DTO.ConversationDTO;
 import com.realestate.backend.model.Message;
+import com.realestate.backend.model.User;
 import com.realestate.backend.repository.MessageRepository;
 import com.realestate.backend.repository.PropertyRepository;
 import com.realestate.backend.repository.UserRepository;
@@ -60,6 +61,11 @@ public class MessageService {
                     Long otherId = entry.getKey();
                     Message lastMsg = entry.getValue();
 
+                    User otherUser = lastMsg.getSender().getUserId().equals(otherId)
+                            ? lastMsg.getSender()
+                            : lastMsg.getReceiver();
+
+
                     // Determinăm numele celuilalt user
                     String otherName = lastMsg.getSender().getUserId().equals(otherId)
                             ? lastMsg.getSender().getFullName()
@@ -67,7 +73,7 @@ public class MessageService {
 
                     int unread = unreadMap.getOrDefault(otherId, 0);
 
-                    return new ConversationDTO(otherId, otherName, lastMsg.getContent(), unread);
+                    return new ConversationDTO(otherId, otherName, lastMsg.getContent(), unread, otherUser.getProfilePicture());
                 })
                 // Optional: sortează după timestamp al ultimului mesaj (descendent)
                 .sorted((d1, d2) -> d2.getLastMessage().compareTo(d1.getLastMessage()))
