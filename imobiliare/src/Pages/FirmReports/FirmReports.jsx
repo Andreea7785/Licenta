@@ -8,7 +8,6 @@ import FooterAgent from "../../Components/FooterAgent/FooterAgent.jsx";
 import axios from "axios";
 import PropertyTypePieChart from "../../Components/PropertyTypePieChart/PropertyTypePieChart.jsx";
 
-// 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
 const FirmReports = () => {
   const [data, setData] = useState(null);
   const target = 250000;
