@@ -41,6 +41,32 @@ export default function PropertyMain() {
     observations: "",
   });
 
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  useEffect(() => {
+    const favorites =
+      JSON.parse(localStorage.getItem(`${user?.id}_favorites`)) || [];
+    const exists = favorites.some((item) => item.id === property?.property_id);
+    setFavorit(exists);
+  }, [property]);
+
+  const handleFavorites = () => {
+    console.log("enter-d-d-d-d-readl-estate");
+    let favorites =
+      JSON.parse(localStorage.getItem(`${user.id}_favorites`)) || [];
+
+    const exists = favorites.some((item) => item.id === property?.property_id);
+
+    if (exists) {
+      favorites = favorites.filter((item) => item.id !== property?.property_id);
+      setFavorit(false);
+    } else {
+      favorites.push({ ...property, id: property?.property_id });
+      setFavorit(true);
+    }
+
+    localStorage.setItem(`${user.id}_favorites`, JSON.stringify(favorites));
+  };
   const handleClose = () => {
     setAppointmentData({
       date: dayjs(),
@@ -61,8 +87,6 @@ export default function PropertyMain() {
   if (!property) return <p>Se încarcă...</p>;
 
   const imageList = property.images?.split(",").map((img) => img.trim()) || [];
-
-  const user = JSON.parse(localStorage.getItem("user"));
 
   const sliderSettings = {
     dots: true,
@@ -153,17 +177,17 @@ export default function PropertyMain() {
               Potrivit pentru: {property.suitable_for}
             </div>
           )}
-
-          <button
-            className="favorite-button"
-            onClick={() => setFavorit(!favorit)}
-          >
-            {favorit ? (
-              <FaHeart className="heart-icon active" />
-            ) : (
-              <FaRegHeart className="heart-icon" />
-            )}
-          </button>
+          {user ? (
+            <button className="favorite-button" onClick={handleFavorites}>
+              {favorit ? (
+                <FaHeart className="heart-icon active" />
+              ) : (
+                <FaRegHeart className="heart-icon" />
+              )}
+            </button>
+          ) : (
+            <></>
+          )}
         </div>
 
         <div className="right">
@@ -237,21 +261,27 @@ export default function PropertyMain() {
         <h3>Despre această proprietate</h3>
         <div className="description-box">
           <p>{property.description}</p>
+          <div className="flex-container">
+            <Button
+              disabled={!user}
+              variant="contained"
+              className="schedule-button"
+              onClick={() => setIsOpen(true)}
+            >
+              Programează o vizionare
+            </Button>
+            <StartUserChatButton
+              label={" Discută cu agentul"}
+              disabled={!user}
+              agentId={property.agent.userId}
+              propertyId={property.property_id}
+            />
+          </div>
 
-          <button
-            disabled={!user}
-            className="schedule-button"
-            onClick={() => setIsOpen(true)}
-          >
-            Programează o vizionare
-          </button>
-          <StartUserChatButton
-            agentId={property.agent.userId}
-            propertyId={property.property_id}
-          />
           {!user ? (
             <span>
-              Important: Conecteaza-te pentru a programa o vizionare.{" "}
+              Important: Conecteaza-te pentru a programa o vizionare sau pentru
+              a discuta cu agentul imobiliar.{" "}
               <a href="/login" className="login-link">
                 Autentifica-te <FiLogIn />
               </a>

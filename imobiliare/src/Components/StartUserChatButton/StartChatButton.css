@@ -1,0 +1,7 @@
+.start-chat-button {
+  background-color: #002147 !important;
+}
+.start-chat-button:disabled {
+  opacity: 0.6;
+  color: white !important;
+}

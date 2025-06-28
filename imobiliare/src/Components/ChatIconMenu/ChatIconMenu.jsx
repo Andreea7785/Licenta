@@ -43,7 +43,11 @@ const ChatIconMenu = () => {
         )}
         {conversations.map((conv) =>
           conv.id != user.id ? (
-            <MenuItem key={conv.id} onClick={() => handleSelectChat(conv.id)}>
+            <MenuItem
+              key={conv.id}
+              onClick={() => handleSelectChat(conv.id)}
+              sx={{ minWidth: "400px" }}
+            >
               <ListItemIcon>
                 <PersonIcon />
               </ListItemIcon>
@@ -59,9 +63,7 @@ const ChatIconMenu = () => {
                 />
               )}
             </MenuItem>
-          ) : (
-            <MenuItem></MenuItem>
-          )
+          ) : null
         )}
       </Menu>
     </>

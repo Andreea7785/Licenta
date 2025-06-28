@@ -43,7 +43,7 @@ function App() {
         <ChatWindow />
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<LoginPage />} />
+            <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
             <Route
               path="/termeni-si-conditii"

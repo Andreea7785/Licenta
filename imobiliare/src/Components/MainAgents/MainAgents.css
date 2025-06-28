@@ -2,10 +2,6 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1.5rem;
-  padding: 2rem;
-  padding-bottom: 110px;
-  padding-left: 70px;
-  padding-top: 0px;
 }
 
 .agent-card {
@@ -16,7 +12,9 @@
   background-color: #fff;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
-
+.agents {
+  padding: 32px;
+}
 .agent-card img {
   width: 100%;
   height: auto;

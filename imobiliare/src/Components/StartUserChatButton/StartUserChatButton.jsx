@@ -1,8 +1,8 @@
 import React from "react";
 import { Button } from "@mui/material";
 import { useChat } from "../../context/ChatContext";
-
-const StartUserChatButton = ({ agentId }) => {
+import "./StartChatButton.css";
+const StartUserChatButton = ({ agentId, label, disabled }) => {
   const { openChatWith } = useChat();
 
   const handleClick = () => {
@@ -10,8 +10,14 @@ const StartUserChatButton = ({ agentId }) => {
   };
 
   return (
-    <Button variant="contained" color="primary" onClick={handleClick}>
-      Discută cu agentul
+    <Button
+      variant="contained"
+      color="primary"
+      className="start-chat-button"
+      onClick={handleClick}
+      disabled={disabled}
+    >
+      {label}
     </Button>
   );
 };

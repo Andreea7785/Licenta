@@ -7,7 +7,7 @@
 }
 
 .chatbot-toggle {
-  background: #0b3d91;
+  background: #002147;
   color: white;
   border: none;
   border-radius: 50%;
@@ -45,7 +45,7 @@
 }
 
 .chatbot-header {
-  background: #0b3d91;
+  background: #002147;
   color: white;
   padding: 8px;
   border-top-left-radius: 16px;
@@ -99,7 +99,7 @@
 }
 
 .chatbot-message.user .chatbot-bubble {
-  background: #0b3d91;
+  background: #002147;
   color: white;
   border-bottom-right-radius: 4px;
 }
@@ -135,7 +135,7 @@
 }
 
 .chatbot-send {
-  background: #0b3d91;
+  background: #002147;
   color: white;
   border: none;
   border-radius: 50%;

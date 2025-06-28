@@ -2,6 +2,7 @@ import "./sock-fix";
 import React, { useState, useEffect, useRef } from "react";
 import SockJS from "sockjs-client";
 import { over } from "stompjs";
+import SendIcon from "@mui/icons-material/Send";
 import {
   Box,
   TextField,
@@ -113,7 +114,7 @@ const ChatApp = () => {
               mb={1}
             >
               {!isMine && (
-                <Avatar sx={{ bgcolor: "#c5a392" }}>
+                <Avatar sx={{ bgcolor: "#002147" }}>
                   {String(msg.senderId).charAt(0)}
                 </Avatar>
               )}
@@ -121,7 +122,7 @@ const ChatApp = () => {
                 elevation={1}
                 sx={{
                   padding: "8px 12px",
-                  backgroundColor: isMine ? "#c5a392" : "#e0e0e0",
+                  backgroundColor: isMine ? "#002147" : "#e0e0e0",
                   color: isMine ? "#fff" : "#000",
                   maxWidth: "70%",
                 }}
@@ -149,7 +150,7 @@ const ChatApp = () => {
           onKeyDown={(e) => e.key === "Enter" && sendMessage()}
         />
         <Button variant="contained" onClick={sendMessage}>
-          Trimite
+          <SendIcon />
         </Button>
       </Stack>
     </Box>

@@ -151,6 +151,7 @@ export const ChatProvider = ({ children }) => {
         messages,
         sendMessage,
         openChatWith,
+        setActiveChat,
         unreadCounts,
         setUnreadCounts,
         user,

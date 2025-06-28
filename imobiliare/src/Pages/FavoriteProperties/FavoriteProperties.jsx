@@ -6,8 +6,10 @@ import Sidebar from "../../Components/Sidebar/Sidebar";
 import "./FavoriteProperties.css";
 
 export const FavoriteProperties = () => {
+  const user = JSON.parse(localStorage.getItem("user"));
+
   const favoriteProperties =
-    JSON.parse(localStorage.getItem("favorites")) || [];
+    JSON.parse(localStorage.getItem(`${user.id}_favorites`)) || [];
   return (
     <div className="layout">
       <Sidebar />

@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from "react";
 import { Box, TextField, Button, Stack } from "@mui/material";
+import SendIcon from "@mui/icons-material/Send";
 
 const InputBar = ({ onSend }) => {
   const [input, setInput] = useState("");
@@ -28,8 +29,17 @@ const InputBar = ({ onSend }) => {
           variant="contained"
           onClick={handleSend}
           disabled={!input.trim()}
+          sx={{
+            backgroundColor: "#002147",
+            background: "white",
+            color: "#002147",
+            fontSize: "50",
+            border: "none",
+            borderRadius: "0px",
+            boxShadow: "none",
+          }}
         >
-          Trimite
+          <SendIcon />
         </Button>
       </Stack>
     </Box>

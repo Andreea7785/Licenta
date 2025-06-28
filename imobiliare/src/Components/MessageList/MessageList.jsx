@@ -27,14 +27,13 @@ const MessageList = React.memo(({ messages, userId }) => {
             <Paper
               sx={{
                 p: 1,
-                backgroundColor: isMine ? "#c5a392" : "#e0e0e0",
+                backgroundColor: isMine ? "#002147" : "#e0e0e0",
                 color: isMine ? "white" : "black",
                 maxWidth: "70%",
               }}
             >
               <Typography variant="body2">{msg.content}</Typography>
             </Paper>
-            {isMine && <PersonIcon />}
           </Stack>
         );
       })}

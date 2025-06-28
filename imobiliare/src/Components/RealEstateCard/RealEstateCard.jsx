@@ -26,15 +26,21 @@ const RealEstateCard = ({ card }) => {
   ];
 
   const [isFavorite, setIsFavorite] = useState(false);
+  const user = localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user"))
+    : null;
 
   useEffect(() => {
-    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    const favorites =
+      JSON.parse(localStorage.getItem(`${user.id}_favorites`)) || [];
     const exists = favorites.some((item) => item.id === card.id);
     setIsFavorite(exists);
   }, []);
 
   const toggleFavorite = () => {
-    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    console.log("enter-d-d-d-d-readl-estate");
+    let favorites =
+      JSON.parse(localStorage.getItem(`${user.id}_favorites`)) || [];
 
     const exists = favorites.some((item) => item.id === card.id);
 
@@ -46,7 +52,7 @@ const RealEstateCard = ({ card }) => {
       setIsFavorite(true);
     }
 
-    localStorage.setItem("favorites", JSON.stringify(favorites));
+    localStorage.setItem(`${user.id}_favorites`, JSON.stringify(favorites));
   };
   return (
     <Card
@@ -70,21 +76,26 @@ const RealEstateCard = ({ card }) => {
         size="small"
         sx={{ position: "absolute", top: 10, left: 10, borderRadius: "0px" }}
       />
-      <IconButton
-        aria-label="add to favorites"
-        onClick={toggleFavorite}
-        style={{
-          position: "absolute",
-          bottom: "55%",
-          backgroundColor: "red",
-          borderRadius: "0px",
-          color: "white",
-          left: 10,
-          padding: 4,
-        }}
-      >
-        {isFavorite ? <FavoriteIcon color="white" /> : <FavoriteBorderIcon />}
-      </IconButton>
+      {user ? (
+        <IconButton
+          aria-label="add to favorites"
+          onClick={toggleFavorite}
+          style={{
+            position: "absolute",
+            bottom: "55%",
+            backgroundColor: "red",
+            borderRadius: "0px",
+            color: "white",
+            left: 10,
+            padding: 4,
+          }}
+        >
+          {isFavorite ? <FavoriteIcon color="white" /> : <FavoriteBorderIcon />}
+        </IconButton>
+      ) : (
+        <></>
+      )}
+
       <Chip
         label={`${card.rating} ★`}
         color="warning"

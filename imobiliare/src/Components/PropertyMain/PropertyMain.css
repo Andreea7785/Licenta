@@ -46,7 +46,7 @@
 .schedule-button {
   align-self: flex-start;
   padding: 8px 16px;
-  background-color: #444;
+  background-color: #444 !important;
   color: white;
   border: none;
   border-radius: 10px;
@@ -54,11 +54,16 @@
   font-weight: 500;
   transition: background-color 0.3s;
 }
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+}
 
 .schedule-button:disabled {
   background-color: gray;
   cursor: not-allowed;
   opacity: 0.6;
+  color: white !important;
 }
 
 .schedule-button:disabled:hover {

@@ -30,17 +30,20 @@ const ChatWindow = () => {
         borderRadius: 2,
         overflow: "hidden",
         zIndex: 1300,
+        borderRight: "16px",
       }}
     >
       <Box
         sx={{
-          backgroundColor: "#c5a392",
+          backgroundColor: "#002147",
           color: "white",
           p: 1,
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
+          cursor: "pointer",
         }}
+        onClick={() => setActiveChat(null)}
       >
         <Typography variant="subtitle1">Chat cu user {activeChat}</Typography>
         <IconButton size="small" onClick={() => setActiveChat(null)}>
