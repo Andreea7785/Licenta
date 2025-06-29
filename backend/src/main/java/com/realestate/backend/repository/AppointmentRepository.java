@@ -12,6 +12,9 @@ import java.util.List;
 public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
     List<Appointment> findByClient_UserId(Integer clientId);
 
+    List<Appointment> findByAgent_UserId(Integer agentId);
+
+
     @Query(value = "SELECT EXTRACT(MONTH FROM a.date) AS month, COUNT(*) " +
             "FROM appointments a " +
             "WHERE a.agent_id = :agentId AND a.date >= :startDate " +

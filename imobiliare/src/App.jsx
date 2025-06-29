@@ -27,6 +27,7 @@ import ChatWindow from "./Components/ChatWindow/ChatWindow.jsx";
 import SalesHistory from "./Pages/SalesHistory.jsx";
 import Guide from "./Pages/Guide.jsx";
 import FAQAgent from "./Pages/FAQAgent.jsx";
+import { AgentAppointments } from "./Pages/AgentAppointments/AgentAppointments.jsx";
 
 const user = JSON.parse(localStorage.getItem("user")) ?? null;
 
@@ -109,6 +110,14 @@ function App() {
             <Route path="/istoric-vanzari" element={<SalesHistory />} />
             <Route path="/ghid-agenti" element={<Guide />} />
             <Route path="/intrebari-frecvente-agent" element={<FAQAgent />} />
+            <Route
+              path="/vizionari"
+              element={
+                <ProtectedAgentRoute>
+                  <AgentAppointments />
+                </ProtectedAgentRoute>
+              }
+            />
           </Routes>
         </BrowserRouter>
       </ChatProvider>

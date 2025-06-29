@@ -17,7 +17,7 @@ export default function LatestProperties() {
 
   return (
     <div className="content">
-      <h2>Cele mai noi proprietăți</h2>
+      <h2 style={{ marginLeft: "50px" }}>Cele mai noi proprietăți</h2>
       <RealEstateList properties={properties} />
     </div>
   );

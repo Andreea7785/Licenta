@@ -49,6 +49,12 @@ public class AppointmentController {
         return ResponseEntity.ok(appointments);
     }
 
+    @GetMapping("/agent/{agentId}")
+    public ResponseEntity<List<Appointment>> getAppointmentsByAgent(@PathVariable Integer agentId) {
+        List<Appointment> appointments = appointmentRepository.findByAgent_UserId(agentId);
+        return ResponseEntity.ok(appointments);
+    }
+
 //
 //    @GetMapping("/{clientId}")
 //    public List<Appointment> getAppointmentsByClientId(@PathVariable Integer clientId) {

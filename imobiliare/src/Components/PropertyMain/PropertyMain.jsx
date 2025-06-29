@@ -262,20 +262,24 @@ export default function PropertyMain() {
         <div className="description-box">
           <p>{property.description}</p>
           <div className="flex-container">
-            <Button
-              disabled={!user}
-              variant="contained"
-              className="schedule-button"
-              onClick={() => setIsOpen(true)}
-            >
-              Programează o vizionare
-            </Button>
-            <StartUserChatButton
-              label={" Discută cu agentul"}
-              disabled={!user}
-              agentId={property.agent.userId}
-              propertyId={property.property_id}
-            />
+            {user && user.role === "client" && (
+              <>
+                <Button
+                  disabled={!user}
+                  variant="contained"
+                  className="schedule-button"
+                  onClick={() => setIsOpen(true)}
+                >
+                  Programează o vizionare
+                </Button>
+                <StartUserChatButton
+                  label={" Discută cu agentul"}
+                  disabled={!user}
+                  agentId={property.agent.userId}
+                  propertyId={property.property_id}
+                />
+              </>
+            )}
           </div>
 
           {!user ? (

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, Link } from "react-router-dom";
-import PropertyMain from "../PropertyMain/PropertyMain.jsx";
 
 import {
   Box,
@@ -41,7 +40,7 @@ const ViewHistoryMain = () => {
       .then((res) => res.json())
       .then((data) => setViewings(data))
       .catch((err) => console.error("Error fetching viewings:", err));
-  }, [location.pathname]); // 🔁 reapelează când se schimbă pagina
+  }, [location.pathname]);
 
   const handleChange = (_, newValue) => setTab(newValue);
   viewings;

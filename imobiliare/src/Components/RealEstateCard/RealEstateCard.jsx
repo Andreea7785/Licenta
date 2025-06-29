@@ -19,12 +19,6 @@ import BathtubIcon from "@mui/icons-material/Bathtub";
 import SquareFootIcon from "@mui/icons-material/SquareFoot";
 
 const RealEstateCard = ({ card }) => {
-  const generatedImages = [
-    `property${card.code}1.jpg`,
-    `property${card.code}2.jpg`,
-    `property${card.code}3.jpg`,
-  ];
-
   const [isFavorite, setIsFavorite] = useState(false);
   const user = localStorage.getItem("user")
     ? JSON.parse(localStorage.getItem("user"))
@@ -34,7 +28,7 @@ const RealEstateCard = ({ card }) => {
     const favorites = user
       ? JSON.parse(localStorage.getItem(`${user.id}_favorites`))
       : [];
-    const exists = favorites.some((item) => item.id === card.id);
+    const exists = favorites?.some((item) => item?.id === card?.id);
     setIsFavorite(exists);
   }, []);
 
@@ -66,7 +60,7 @@ const RealEstateCard = ({ card }) => {
     >
       <CardMedia
         component="img"
-        image={`/images/${generatedImages[0]}`}
+        image={`/images/${card.images.split(",")[0]}`}
         alt={card.title}
         sx={{ height: 180, objectFit: "cover" }}
       />
@@ -164,7 +158,7 @@ const RealEstateCard = ({ card }) => {
       <CardActions disableSpacing>
         <Button
           size="small"
-          href={`/property/${card.code}`}
+          href={`/property/${card.property_id || card.id}`}
           component="a"
           sx={{
             fontWeight: 700,

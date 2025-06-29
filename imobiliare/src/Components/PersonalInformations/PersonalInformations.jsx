@@ -37,7 +37,7 @@ export const PersonalInformations = ({ user, showDocuments, hideTitle }) => {
           <Grid item xs={12} sm={6}>
             <TextField
               label="Nume"
-              value={user?.lastName}
+              value={user?.lastName || user?.lastname}
               fullWidth
               variant="outlined"
               InputLabelProps={{ shrink: true }}
@@ -46,7 +46,7 @@ export const PersonalInformations = ({ user, showDocuments, hideTitle }) => {
           <Grid item xs={12} sm={6}>
             <TextField
               label="Prenume"
-              value={user?.firstName}
+              value={user?.firstName || user?.firstname}
               fullWidth
               variant="outlined"
               InputLabelProps={{ shrink: true }}

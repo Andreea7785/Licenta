@@ -6,6 +6,8 @@ export default function LoadedPropertiesMain() {
   const [properties, setProperties] = useState([]);
   const currentEmail = JSON.parse(localStorage.getItem("user")).email;
 
+  console.log(properties);
+
   useEffect(() => {
     if (!currentEmail) return;
 

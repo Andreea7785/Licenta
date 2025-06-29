@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import "./Header.css";
 import { FiLogIn } from "react-icons/fi";
-import { Box, Avatar } from "@mui/material";
+import { Box, Avatar, Menu, MenuItem } from "@mui/material";
 import ChatIconMenu from "../ChatIconMenu/ChatIconMenu";
 
 export default function Header() {
-  const [isOpen, setIsOpen] = useState(false);
-  const toggleMenu = () => setIsOpen((prev) => !prev);
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleOpen = (event) => setAnchorEl(event.currentTarget);
+  const handleClose = () => setAnchorEl(null);
 
   const user = JSON.parse(localStorage.getItem("user"));
   const userId = user?.id;
@@ -18,7 +20,7 @@ export default function Header() {
       <div className="header-right">
         {userId ? (
           <div className="profile-container">
-            <div onClick={toggleMenu} style={{ cursor: "pointer" }}>
+            <div onClick={handleOpen} style={{ cursor: "pointer" }}>
               <Avatar
                 sx={{
                   bgcolor: "#fff",
@@ -32,36 +34,34 @@ export default function Header() {
                 {user?.firstname?.charAt(0).toUpperCase()}
               </Avatar>
             </div>
-
-            {isOpen && (
-              <div className="options">
-                <ul>
-                  <li>
-                    <a href="/informatii-cont">Informații cont</a>
-                  </li>
-
-                  {userRole !== "agent" && (
-                    <>
-                      <li>
-                        <a href="/proprietati-favorite">Proprietăți favorite</a>
-                      </li>
-                      <li>
-                        <a href="/istoric">Istoric</a>
-                      </li>
-                    </>
-                  )}
-
-                  <li
-                    onClick={() => {
-                      localStorage.removeItem("user");
-                      window.location.href = "/login";
-                    }}
-                  >
-                    Logout
-                  </li>
-                </ul>
-              </div>
-            )}
+            <Menu
+              anchorEl={anchorEl}
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+            >
+              <MenuItem>
+                {" "}
+                <a href="/informatii-cont">Informații cont</a>
+              </MenuItem>
+              {userRole !== "agent" && (
+                <>
+                  <MenuItem>
+                    <a href="/proprietati-favorite">Proprietăți favorite</a>
+                  </MenuItem>
+                  <MenuItem>
+                    <a href="/istoric">Istoric</a>
+                  </MenuItem>
+                </>
+              )}
+              <MenuItem
+                onClick={() => {
+                  localStorage.removeItem("user");
+                  window.location.href = "/login";
+                }}
+              >
+                Logout
+              </MenuItem>
+            </Menu>
 
             <Box>
               <ChatIconMenu />

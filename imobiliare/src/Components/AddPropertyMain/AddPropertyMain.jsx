@@ -19,7 +19,7 @@ export default function AddPropertyMain() {
     suitable_for: "",
     facilities: [{ name: "", distance: "", unit: "m" }],
     images: [],
-    agent_asigned: "",
+    agent_asigned: JSON.parse(localStorage.getItem("user")).email,
   });
 
   const [submitMessage, setSubmitMessage] = useState("");
@@ -39,17 +39,10 @@ export default function AddPropertyMain() {
       data.year &&
       data.surface &&
       data.suitable_for &&
-      data.area
+      data.area &&
+      data.images.length === 3
     );
   };
-
-  useEffect(() => {
-    const email = localStorage.getItem("agent_email");
-    setFormData((prev) => ({
-      ...prev,
-      agent_asigned: email || "",
-    }));
-  }, []);
 
   useEffect(() => {
     setFormValid(isFormComplete(formData));
@@ -66,7 +59,7 @@ export default function AddPropertyMain() {
       throw new Error("Eroare la încărcarea imaginii");
     }
 
-    return await response.text(); // returnează doar numele fișierului
+    return await response.text();
   };
 
   const handleFacilityChange = (index, field, value) => {
@@ -213,7 +206,7 @@ export default function AddPropertyMain() {
           </label>
 
           <div className="image-grid">
-            {Array.from({ length: 4 }).map((_, index) => {
+            {Array.from({ length: 3 }).map((_, index) => {
               const image = formData.images[index];
               if (image) {
                 return (
@@ -263,6 +256,11 @@ export default function AddPropertyMain() {
               }
             })}
           </div>
+          {formData.images.length !== 3 && (
+            <p className="form-note-error">
+              * Trebuie să încarci exact 3 imagini!
+            </p>
+          )}
         </div>
 
         <div className="form-group">

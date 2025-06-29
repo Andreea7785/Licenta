@@ -31,7 +31,7 @@ body {
 }
 
 .property-form button[type="submit"] {
-  background-color: #97a9c2;
+  background-color: #002147;
   color: white;
   padding: 0.9rem 1.6rem;
   border: none;
@@ -116,18 +116,13 @@ body {
 
 .add-btn,
 .remove-btn {
-  background-color: #97a9c2;
+  background-color: #002147;
   color: white;
   border: none;
   border-radius: 8px;
   padding: 0.5rem 1rem;
   cursor: pointer;
   font-weight: bold;
-}
-
-.add-btn:hover,
-.remove-btn:hover {
-  background-color: #647d9e;
 }
 
 .form-note-error {

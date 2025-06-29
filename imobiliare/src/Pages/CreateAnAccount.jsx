@@ -138,6 +138,7 @@ const RegisterPage = () => {
             required={true}
           />
         </Box>
+        <p> Încarcă o poza cu buletinul tău ⬇️</p>
         <input accept="image/*" type="file" onChange={handleFileChange} />
         <TextField
           label="Parolă"
@@ -161,14 +162,11 @@ const RegisterPage = () => {
         <Button
           variant="contained"
           sx={{
-            backgroundColor: "#B2BCC7",
+            backgroundColor: "#193759",
             color: "white",
             marginTop: 3,
             paddingY: 1.5,
             borderRadius: 5,
-            "&:hover": {
-              backgroundColor: "#99a6b5",
-            },
           }}
           onClick={register}
           fullWidth
@@ -177,7 +175,17 @@ const RegisterPage = () => {
         </Button>
         <Typography variant="body2" align="center" mt={2}>
           Ai deja cont?{" "}
-          <Link href="/login" sx={{ color: "black" }}>
+          <Link
+            href="/login"
+            sx={{
+              color: "black",
+              textDecoration: "none",
+              "&:hover": {
+                color: "black",
+                textDecoration: "underline",
+              },
+            }}
+          >
             Autentifică-te
           </Link>
         </Typography>
